@@ -25,18 +25,21 @@ import {
  * Variants for the multi-select component to handle different styles.
  * Uses class-variance-authority (cva) to define different styles based on "variant" prop.
  */
-const multiSelectVariants = cva("m-1", {
-  variants: {
-    size: {
-      small: "h-8 text-sm",
-      default: "h-10 text-base",
-      large: "h-12 text-lg",
+const multiSelectVariants = cva(
+  "flex w-full p-1 pl-3 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit",
+  {
+    variants: {
+      size: {
+        small: "h-8 text-sm",
+        default: "h-10 text-base",
+        large: "h-12 text-lg",
+      },
     },
-  },
-  defaultVariants: {
-    size: "default",
-  },
-});
+    defaultVariants: {
+      size: "default",
+    },
+  }
+);
 
 /**
  * Props for MultiSelect component
@@ -161,10 +164,7 @@ export const MultiSelect = React.forwardRef<
             ref={ref}
             {...props}
             onClick={handleTogglePopover}
-            className={cn(
-              "flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit",
-              className
-            )}
+            className={cn(multiSelectVariants({ size, className }))}
           >
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
@@ -178,6 +178,7 @@ export const MultiSelect = React.forwardRef<
                         className={cn(
                           "bg-primary text-secondary font-normal border-none"
                         )}
+                        size={size}
                       >
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
@@ -199,6 +200,7 @@ export const MultiSelect = React.forwardRef<
                       className={cn(
                         "bg-primary text-secondary font-normal border-none"
                       )}
+                      size={size}
                     >
                       {`+ ${selectedValues.length - maxCount}`}
                       <XIcon

@@ -12,7 +12,7 @@ export default function Labels() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Labels</CardTitle>
+        <CardTitle>Label</CardTitle>
         <CardDescription>All label avalaible</CardDescription>
       </CardHeader>
       <CardContent>

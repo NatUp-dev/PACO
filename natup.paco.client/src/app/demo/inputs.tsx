@@ -14,7 +14,7 @@ export default function Inputs() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Inputs</CardTitle>
+        <CardTitle>Input</CardTitle>
         <CardDescription>All input avalaible</CardDescription>
       </CardHeader>
       <CardContent>

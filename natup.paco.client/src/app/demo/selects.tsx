@@ -11,9 +11,7 @@ import {
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -24,7 +22,7 @@ export default function Selects() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Selects</CardTitle>
+        <CardTitle>Select</CardTitle>
         <CardDescription>All select avalaible</CardDescription>
       </CardHeader>
       <CardContent>
@@ -85,6 +83,7 @@ export default function Selects() {
               defaultValue={value}
               placeholder="Selectionner..."
               maxCount={2}
+              size={"small"}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -115,6 +114,7 @@ export default function Selects() {
               defaultValue={value}
               placeholder="Selectionner..."
               maxCount={2}
+              size={"large"}
             />
           </div>
         </div>

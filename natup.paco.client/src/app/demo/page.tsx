@@ -4,6 +4,9 @@ import Labels from "./labels";
 import Inputs from "./inputs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Selects from "./selects";
+import Checkboxs from "./checkboxs";
+import Radios from "./radios";
+import Switchs from "./switchs";
 
 export default function Demo() {
   return (
@@ -12,10 +15,13 @@ export default function Demo() {
       <div className="flex flex-col gap-10">
         <Tabs defaultValue="buttons" className="w-full">
           <TabsList>
-            <TabsTrigger value="buttons">Buttons</TabsTrigger>
-            <TabsTrigger value="labels">Labels</TabsTrigger>
-            <TabsTrigger value="inputs">Inputs</TabsTrigger>
-            <TabsTrigger value="selects">Selects</TabsTrigger>
+            <TabsTrigger value="buttons">Button</TabsTrigger>
+            <TabsTrigger value="labels">Label</TabsTrigger>
+            <TabsTrigger value="inputs">Input</TabsTrigger>
+            <TabsTrigger value="selects">Select</TabsTrigger>
+            <TabsTrigger value="checkboxs">Checkbox</TabsTrigger>
+            <TabsTrigger value="radios">Radio</TabsTrigger>
+            <TabsTrigger value="switchs">Switch</TabsTrigger>
           </TabsList>
           <TabsContent value="buttons">
             <Buttons />
@@ -28,6 +34,15 @@ export default function Demo() {
           </TabsContent>
           <TabsContent value="selects">
             <Selects />
+          </TabsContent>
+          <TabsContent value="checkboxs">
+            <Checkboxs />
+          </TabsContent>
+          <TabsContent value="radios">
+            <Radios />
+          </TabsContent>
+          <TabsContent value="switchs">
+            <Switchs />
           </TabsContent>
         </Tabs>
       </div>
