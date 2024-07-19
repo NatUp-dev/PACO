@@ -11,7 +11,9 @@ import Switchs from "./switchs";
 export default function Demo() {
   return (
     <div className="px-20 py-10">
-      <div className="pb-20">Hello !</div>
+      <div className="pb-10 uppercase">
+        Components <span className="text-blue-500">!</span>
+      </div>
       <div className="flex flex-col gap-10">
         <Tabs defaultValue="buttons" className="w-full">
           <TabsList>

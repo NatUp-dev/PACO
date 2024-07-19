@@ -21,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <div className="bg-natup-gradient h-1.5 w-full"></div>
+        {children}
+      </body>
     </html>
   );
 }

@@ -18,10 +18,10 @@ export default function Buttons() {
       <CardContent>
         <div className="text-xs py-2">size</div>
         <div className="flex gap-6 items-center">
-          <Button size={"xs"}>Valider</Button>
-          <Button size={"sm"}>Valider</Button>
-          <Button size={"default"}>Valider</Button>
-          <Button size={"lg"}>Valider</Button>
+          <Button size={"xs"}>Bouton</Button>
+          <Button size={"sm"}>Bouton</Button>
+          <Button size={"default"}>Bouton</Button>
+          <Button size={"lg"}>Bouton</Button>
         </div>
         <div className="text-xs py-2">type</div>
         <div className="flex gap-6">

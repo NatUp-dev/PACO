@@ -1,7 +1,8 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -9,8 +10,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 
 export default function Inputs() {
+  const [date, setDate] = useState<Date | undefined>();
+  const [date2, setDate2] = useState<Date | undefined>();
+  const [date3, setDate3] = useState<Date | undefined>();
   return (
     <Card>
       <CardHeader>
@@ -102,6 +113,107 @@ export default function Inputs() {
           <div className="flex flex-col gap-2 w-80">
             <Label size={"large"}>Prefixed & Suffixed (large)</Label>
             <Input size={"large"} prefix="Hash" suffix="Hash" />
+          </div>
+        </div>
+        <div className="text-xs py-2">calendar</div>
+        <div className="flex gap-6 items-end pt-4">
+          <div className="flex flex-col gap-2 w-80">
+            <Label size={"small"}>Calendar (small)</Label>
+            <Popover>
+              <PopoverTrigger>
+                <Input
+                  className="w-80"
+                  prefix="Calendar"
+                  placeholder="DD/MM/AAAA"
+                  value={date?.toLocaleDateString()}
+                  size={"small"}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md border"
+                  footer={
+                    <div className="flex items-center justify-center">
+                      <Button
+                        variant={"link"}
+                        className="text-blue-600 underline text-sm"
+                        onClick={() => setDate(new Date())}
+                      >
+                        Aujourd'hui
+                      </Button>
+                    </div>
+                  }
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div className="flex flex-col gap-2 w-80">
+            <Label>Calendar (default)</Label>
+            <Popover>
+              <PopoverTrigger>
+                <Input
+                  className="w-80"
+                  prefix="Calendar"
+                  placeholder="DD/MM/AAAA"
+                  value={date2?.toLocaleDateString()}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date2}
+                  onSelect={setDate2}
+                  className="rounded-md border"
+                  footer={
+                    <div className="flex items-center justify-center">
+                      <Button
+                        variant={"link"}
+                        className="text-blue-600 underline text-sm"
+                        onClick={() => setDate(new Date())}
+                      >
+                        Aujourd'hui
+                      </Button>
+                    </div>
+                  }
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div className="flex flex-col gap-2 w-80">
+            <Label>Calendar (large)</Label>
+            <Popover>
+              <PopoverTrigger>
+                <Input
+                  className="w-80"
+                  prefix="Calendar"
+                  placeholder="DD/MM/AAAA"
+                  value={date3?.toLocaleDateString()}
+                  size={"large"}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date3}
+                  onSelect={setDate3}
+                  className="rounded-md border"
+                  footer={
+                    <div className="flex items-center justify-center">
+                      <Button
+                        variant={"link"}
+                        className="text-blue-600 underline text-sm"
+                        onClick={() => setDate(new Date())}
+                      >
+                        Aujourd'hui
+                      </Button>
+                    </div>
+                  }
+                />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </CardContent>

@@ -26,7 +26,7 @@ import {
  * Uses class-variance-authority (cva) to define different styles based on "variant" prop.
  */
 const multiSelectVariants = cva(
-  "flex w-full p-1 pl-3 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit",
+  "flex w-full p-1 pl-3 rounded-md border border-gray-200 min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit",
   {
     variants: {
       size: {
@@ -176,7 +176,7 @@ export const MultiSelect = React.forwardRef<
                       <Badge
                         key={value}
                         className={cn(
-                          "bg-primary text-secondary font-normal border-none"
+                          "bg-blue-50 text-blue-700 font-medium border-none"
                         )}
                         size={size}
                       >
@@ -185,7 +185,7 @@ export const MultiSelect = React.forwardRef<
                         )}
                         {option?.label}
                         <XIcon
-                          className="ml-2 h-3 w-3 cursor-pointer"
+                          className="ml-2 h-4 w-4 cursor-pointer"
                           strokeWidth={1}
                           onClick={(event) => {
                             event.stopPropagation();
@@ -198,13 +198,13 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > maxCount && (
                     <Badge
                       className={cn(
-                        "bg-primary text-secondary font-normal border-none"
+                        "bg-blue-50 text-blue-700 font-medium border-none"
                       )}
                       size={size}
                     >
                       {`+ ${selectedValues.length - maxCount}`}
                       <XIcon
-                        className="ml-2 h-3 w-3 cursor-pointer"
+                        className="ml-2 h-4 w-4 cursor-pointer"
                         strokeWidth={1}
                         onClick={(event) => {
                           event.stopPropagation();
@@ -258,9 +258,9 @@ export const MultiSelect = React.forwardRef<
                     >
                       <div
                         className={cn(
-                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                          "mr-2 flex h-4 w-4 items-center justify-center",
                           isSelected
-                            ? "bg-primary text-primary-foreground"
+                            ? "text-gray-700"
                             : "opacity-50 [&_svg]:invisible"
                         )}
                       >

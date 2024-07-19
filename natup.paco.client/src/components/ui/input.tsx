@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { icons } from "lucide-react";
 
 const inputVariants = cva(
-  "flex w-full rounded-lg border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-inset disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full rounded-lg border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {
@@ -39,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative">
         {PrefixIcon !== null && (
           <span className="absolute left-0 top-0 h-full flex p-2 items-center">
-            <PrefixIcon className="h-4 w-4 text-muted-foreground top-2" />
+            <PrefixIcon className="h-4 w-4 text-gray-400 top-2" />
           </span>
         )}
         <input
@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         {SuffixIcon !== null && (
           <span className="absolute right-0 top-0 h-full flex p-2 items-center">
-            <SuffixIcon className="h-4 w-4 text-muted-foreground top-2" />
+            <SuffixIcon className="h-4 w-4 text-gray-400 top-2" />
           </span>
         )}
       </div>
