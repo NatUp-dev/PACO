@@ -52,6 +52,10 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        turquoise: {
+          DEFAULT: "hsl(var(--turquoise))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         blue: {
           50: "#F0FCFF",
           100: "#D4F7FF",
