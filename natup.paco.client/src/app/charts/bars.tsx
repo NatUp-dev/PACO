@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { icons } from "lucide-react";
+import { scaleLog } from "d3-scale";
+
 import {
   Bar,
   BarChart,
@@ -12,14 +13,7 @@ import {
   Label as LabelRecharts,
 } from "recharts";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -28,7 +22,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
-
+import Icon from "@/components/ui/icon";
 const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -50,6 +44,10 @@ type ChartDataItem = {
 
 export default function Bars() {
   const chartData: ChartDataItem[] = [
+    { type: "ble", "2021": 100100, "2022": 312, "2023": 498 },
+    { type: "orge", "2021": 245, "2022": 491, "2023": 499 },
+    { type: "colza", "2021": 589, "2022": 301, "2023": 399 },
+    { type: "pois", "2021": 224, "2022": 481, "2023": 499 },
     { type: "ble", "2021": 710, "2022": 312, "2023": 498 },
     { type: "orge", "2021": 245, "2022": 491, "2023": 499 },
     { type: "colza", "2021": 589, "2022": 301, "2023": 399 },
@@ -102,8 +100,6 @@ export default function Bars() {
     },
   } satisfies ChartConfig;
 
-  const WheatIcon = icons["Wheat"];
-
   const customizedGroupTick = (props: any) => {
     const { index, x, y, payload } = props;
     const current = chartData[index];
@@ -115,30 +111,36 @@ export default function Bars() {
       return sum;
     }, 0);
 
+    const customLegend = (
+      <div className="flex justify-between items-center gap-2">
+        <div className="flex items-center gap-2 w-full">
+          <Icon iconName="Wheat" tooltip="yellow"></Icon>
+          <span className="text-xl text-gray-700 font-bold">
+            {chartConfig[payload.value as keyof typeof chartConfig]?.label}
+          </span>
+        </div>
+        <div className="flex  justify-end w-full pr-2">
+          <div className="flex flex-col w-fit">
+            <span className="text-xs text-gray-500  w-fit">TOTAL</span>
+            <span className="text-sm font-semibold text-gray-800  w-fit">
+              {totalc}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <>
         <g>
-          <text x={x - 30} y={y - 20}>
-            TOTAL
-          </text>
-        </g>
-        <g>
-          <text font-weight="bold" x={x - 30} y={y}>
-            {totalc}
-          </text>
-        </g>
-        <g>
           <foreignObject
-            x={x - 130}
+            x={x - 200}
             y={y - 20}
-            width="80px"
-            height="60px"
+            width="240px"
+            height="3.5em"
             className=""
           >
-            <WheatIcon className="text-yellow-800" />
-            <Label size={"large"}>
-              {chartConfig[payload.value as keyof typeof chartConfig]?.label}
-            </Label>
+            {customLegend}
           </foreignObject>
         </g>
       </>
@@ -146,13 +148,13 @@ export default function Bars() {
   };
 
   return (
-    <div className="grid sm:grid-cols-2 gap-4">
+    <div className="grid sm:grid-cols-1 gap-4">
       <Card>
         <CardHeader className="pb-0">
           <CardTitle>Prix moyen pondéré (€/T) </CardTitle>
         </CardHeader>
         <CardContent className="flex-1 pb-0">
-          <ChartContainer config={chartConfig} className="h-[400px] w-full">
+          <ChartContainer config={chartConfig} className="h-80 w-full">
             <BarChart accessibilityLayer data={chartData}>
               <CartesianGrid vertical={false} />
               <XAxis
@@ -164,7 +166,12 @@ export default function Bars() {
                   chartConfig[value as keyof typeof chartConfig]?.label
                 }
               />
-              <YAxis tickLine={false} axisLine={false} />
+              <YAxis
+                tickLine={false}
+                axisLine={false}
+                scale="log"
+                domain={["dataMin", "dataMax"]}
+              />
               <ChartTooltip />
 
               {dataKeys.map((key, index) => (
@@ -190,7 +197,7 @@ export default function Bars() {
               layout="vertical"
               data={chartData}
               margin={{
-                left: 150,
+                left: 200,
               }}
             >
               <CartesianGrid />
@@ -204,8 +211,8 @@ export default function Bars() {
               <YAxis
                 dataKey="type"
                 type="category"
-                tickLine={false}
-                axisLine={false}
+                tickLine={true}
+                axisLine={true}
                 //tickFormatter={(value) => value}
                 tickMargin={40}
                 tick={customizedGroupTick}
@@ -221,7 +228,7 @@ export default function Bars() {
               >
                 <LabelList
                   dataKey="2021"
-                  position="inside"
+                  position="insideLeft"
                   offset={8}
                   className="fill-[white]"
                   fontSize={12}
@@ -230,7 +237,7 @@ export default function Bars() {
               <Bar dataKey="2022" stackId="a" fill="var(--color-2022)">
                 <LabelList
                   dataKey="2022"
-                  position="inside"
+                  position="insideLeft"
                   offset={8}
                   className="fill-[white]"
                   fontSize={12}
@@ -244,7 +251,7 @@ export default function Bars() {
               >
                 <LabelList
                   dataKey="2023"
-                  position="inside"
+                  position="insideLeft"
                   offset={8}
                   className="fill-[white]"
                   fontSize={12}

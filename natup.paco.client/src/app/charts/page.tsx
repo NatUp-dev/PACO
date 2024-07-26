@@ -2,8 +2,8 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Pies from "./pies";
 import Bars from "./bars";
-import Lines from "./lines";
 import DataCards from "./datacards";
+import CustomCharts from "./customcharts";
 
 export default function charts() {
   return (
@@ -16,8 +16,8 @@ export default function charts() {
           <TabsList>
             <TabsTrigger value="pie">Pie Chart</TabsTrigger>
             <TabsTrigger value="bar">Bar Chart</TabsTrigger>
-            <TabsTrigger value="line">Line Chart</TabsTrigger>
             <TabsTrigger value="datacard">Data Card</TabsTrigger>
+            <TabsTrigger value="customchart">Custom Chart</TabsTrigger>
           </TabsList>
           <TabsContent value="pie">
             <Pies />
@@ -25,11 +25,11 @@ export default function charts() {
           <TabsContent value="bar">
             <Bars />
           </TabsContent>
-          <TabsContent value="line">
-            <Lines />
-          </TabsContent>
           <TabsContent value="datacard">
             <DataCards />
+          </TabsContent>
+          <TabsContent value="customchart">
+            <CustomCharts />
           </TabsContent>
         </Tabs>
       </div>

@@ -1,7 +1,24 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { icons } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+
+/*Icones custom */
+import Beet from "@/assets/icons/beet.svg";
+import Cow from "@/assets/icons/cow.svg";
+import Sheep from "@/assets/icons/Sheep.svg";
+import Potato from "@/assets/icons/potato.svg";
+
+const customIcons = {
+  beet: Beet,
+  cow: Cow,
+  sheep: Sheep,
+  potato: Potato,
+};
+
 import {
   Tooltip,
   TooltipContent,
@@ -10,71 +27,77 @@ import {
 } from "@/components/ui/tooltip";
 
 interface IconProps {
-  iconName: keyof typeof icons;
+  iconName: keyof typeof icons | CutomIconType;
   tooltip?: string;
-  color?:
-    | "slate"
-    | "gray"
-    | "zinc"
-    | "neutral"
-    | "stone"
-    | "red"
-    | "orange"
-    | "amber"
-    | "yellow"
-    | "lime"
-    | "green"
-    | "emerald"
-    | "teal"
-    | "cyan"
-    | "sky"
-    | "blue"
-    | "indigo"
-    | "violet"
-    | "purple"
-    | "fuchsia"
-    | "pink"
-    | "rose"
-    | "success"
-    | "warning"
-    | "danger";
+  className?: string;
+  round?: boolean;
 }
 
-const Icon: React.FC<IconProps> = ({ iconName, color, tooltip }) => {
-  const IconComponent = icons[iconName as keyof typeof icons];
+const iconVariants = cva("", {
+  variants: {
+    size: {
+      small: "h-4 w-4",
+      default: "h-6 w-6",
+      large: "h-8 w-8",
+    },
+    defaultVariants: { size: "default" },
+  },
+});
 
-  if (!IconComponent) {
-    return <div>Icon not found</div>; // Gérer l'absence d'icône comme vous le souhaitez
-  }
+type CutomIconType = "potato" | "beet" | "cow" | "sheep";
 
-  const variant: string = color ?? "slate";
-  const displayIcon = (
-    <span>
-      <div
-        className={
-          "bg-" +
-          variant +
-          "-200 text-" +
-          variant +
-          "-800 rounded-full flex justify-center items-center m-1 h-8 w-8"
-        }
-      >
-        <IconComponent className="w-4" />
-      </div>
-    </span>
-  );
+// Vérifie si la valeur est un nom d'icône valide
+const isIconKey = (key: any): key is keyof typeof icons => {
+  return key in icons;
+};
+
+const Icon: React.FC<IconProps & VariantProps<typeof iconVariants>> = ({
+  iconName,
+  className,
+  tooltip,
+  round,
+  size,
+}) => {
+  const displayIcon = function () {
+    if (isIconKey(iconName)) {
+      const IconComponent = icons[iconName as keyof typeof icons];
+
+      return (
+        <div
+          className={cn(
+            `flex items-center justify-center`,
+            round ? "rounded-full p-2" : "",
+            className
+          )}
+        >
+          <IconComponent className={cn(iconVariants({ size }), "")} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="self-center">
+          <Image
+            priority
+            src={customIcons[iconName]}
+            className={cn(iconVariants({ size }))}
+            alt="Pas de données"
+          />
+        </div>
+      );
+    }
+  };
 
   return tooltip ? (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{displayIcon}</TooltipTrigger>
+        <TooltipTrigger asChild>{displayIcon()}</TooltipTrigger>
         <TooltipContent>
-          <p>{tooltip}</p>
+          <p className="">{tooltip}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   ) : (
-    displayIcon
+    displayIcon()
   );
 };
 

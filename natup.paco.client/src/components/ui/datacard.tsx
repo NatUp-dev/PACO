@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Info, icons } from "lucide-react";
+import { Info, Plus, icons } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -19,14 +19,15 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface DataCardProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   data?: number;
   type?: string;
   progress?: boolean;
-  icon: keyof typeof icons;
+  icon?: keyof typeof icons;
   tooltip?: string;
   loading?: boolean;
+  empty?: boolean;
 }
 
 const DataCard: React.FC<DataCardProps> = ({
@@ -38,12 +39,17 @@ const DataCard: React.FC<DataCardProps> = ({
   subtitle,
   tooltip,
   loading,
+  empty,
 }) => {
   const IconComponent = icons[icon as keyof typeof icons];
 
   const isCurrency: boolean = type != undefined && type.indexOf("€") > -1;
 
-  return (
+  return empty ? (
+    <div className="flex rounded-xl border border-dashed border-gray-300 text-gray-500 shadow-sm items-center justify-center h-32 w-full bg-gray-200 hover:bg-gray-300 cursor-pointer">
+      <Plus />
+    </div>
+  ) : (
     <div className="rounded-xl border bg-card text-card-foreground shadow-sm content-center h-32 w-full">
       {!loading ? (
         <div className="flex justify-between  gap-4 p-6 ">

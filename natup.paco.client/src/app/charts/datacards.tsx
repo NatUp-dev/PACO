@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import Icon from "@/components/ui/icon";
 import DataCard from "@/components/ui/datacard";
 export default function DataCards() {
@@ -52,6 +53,10 @@ export default function DataCards() {
             tooltip="Tooltip livraisons"
           />
           <DataCard title="Loading" data={0} icon="Wheat" loading />
+          <DataCard empty loading />
+          <code>
+            <pre></pre>
+          </code>
         </div>
       </CardContent>
     </Card>
