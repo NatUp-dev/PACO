@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Menu() {
-  return <div>Content</div>;
+  return <div></div>;
 }

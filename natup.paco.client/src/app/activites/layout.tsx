@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { Sidebar } from "../../../components/menu/sidebar";
+import { Sidebar } from "../../components/menu/sidebar";
 import { useStore } from "@/components/hooks/use-store";
 import { useSidebarToggle } from "@/components/hooks/use-sidebar-toggle";
 import { cn } from "@/lib/utils";
+import Header from "@/components/header/header";
 
 export default function Layout({
   children,
@@ -21,6 +22,7 @@ export default function Layout({
           sidebar?.isOpen ? "ml-[212px]" : "ml-[64px]"
         )}
       >
+        <Header />
         {children}
       </div>
     </>

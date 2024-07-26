@@ -7,7 +7,7 @@ import logomini from "@/assets/logo_mini.svg";
 import { Separator } from "@/components/ui/separator";
 import { ChevronsRight, icons } from "lucide-react";
 import Help from "./help";
-import MenuItem from "./menui-tem";
+import MenuItem from "./menu-item";
 import MenuSection from "./menu-section";
 import { Button } from "../ui/button";
 import BottomMenuItem from "./bottom-menu-item";
@@ -90,17 +90,10 @@ export function Sidebar() {
               )}
             />
           </Link>
-          <Separator />
+          {/* <Separator /> */}
         </div>
         <div className="flex flex-col text-sm justify-between h-full">
           <div className="flex flex-col gap-2 mt-[-10px]">
-            <MenuItem
-              icon="House"
-              text="Accueil"
-              link="/"
-              isOpen={sidebar.isOpen}
-              isSelected={true}
-            />
             <div>
               {menu.map((item) => {
                 return (

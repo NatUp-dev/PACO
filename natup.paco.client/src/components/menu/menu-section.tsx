@@ -12,7 +12,7 @@ export default function MenuSection({
   return (
     <div
       className={cn(
-        "flex px-2.5 gap-2.5 items-center text-gray-400 text-xs",
+        "flex px-2.5 gap-2.5 items-center text-gray-400 text-xs h-4.5",
         !isOpen && "pb-2"
       )}
     >
