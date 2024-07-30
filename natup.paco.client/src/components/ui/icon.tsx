@@ -1,23 +1,40 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { icons } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 /*Icones custom */
+import Potato from "@/assets/icons/potato.svg";
 import Beet from "@/assets/icons/beet.svg";
 import Cow from "@/assets/icons/cow.svg";
-import Sheep from "@/assets/icons/Sheep.svg";
-import Potato from "@/assets/icons/potato.svg";
+import Sheep from "@/assets/icons/sheep.svg";
+import CO2 from "@/assets/icons/CO2.svg";
+import Engrais_protection from "@/assets/icons/engrais_protection.svg";
+import Engrais from "@/assets/icons/engrais.svg";
+import Granules from "@/assets/icons/granules.svg";
+import Seed from "@/assets/icons/seed.svg";
+import Plant from "@/assets/icons/plant.svg";
+import Toolsgarden from "@/assets/icons/toolsgarden.svg";
+import Ficelle from "@/assets/icons/ficelle.svg";
 
 const customIcons = {
-  beet: Beet,
-  cow: Cow,
-  sheep: Sheep,
-  potato: Potato,
+  Potato: Potato,
+  Beet: Beet,
+  Cow: Cow,
+  Sheep: Sheep,
+  CO2: CO2,
+  Engrais_protection: Engrais_protection,
+  Engrais: Engrais,
+  Granules: Granules,
+  Seed: Seed,
+  Plant: Plant,
+  Toolsgarden: Toolsgarden,
+  Ficelle: Ficelle,
 };
+
+export type IconName = keyof typeof icons | keyof typeof customIcons;
 
 import {
   Tooltip,
@@ -27,7 +44,7 @@ import {
 } from "@/components/ui/tooltip";
 
 interface IconProps {
-  iconName: keyof typeof icons | CutomIconType;
+  iconName: IconName;
   tooltip?: string;
   className?: string;
   round?: boolean;
@@ -44,13 +61,6 @@ const iconVariants = cva("", {
   },
 });
 
-type CutomIconType = "potato" | "beet" | "cow" | "sheep";
-
-// Vérifie si la valeur est un nom d'icône valide
-const isIconKey = (key: any): key is keyof typeof icons => {
-  return key in icons;
-};
-
 const Icon: React.FC<IconProps & VariantProps<typeof iconVariants>> = ({
   iconName,
   className,
@@ -59,38 +69,27 @@ const Icon: React.FC<IconProps & VariantProps<typeof iconVariants>> = ({
   size,
 }) => {
   const displayIcon = function () {
-    if (isIconKey(iconName)) {
-      const IconComponent = icons[iconName as keyof typeof icons];
+    let IconComponent;
 
-      return (
-        <div
-          className={cn(
-            `flex items-center justify-center`,
-            round ? "rounded-full p-2" : "",
-            className
-          )}
-        >
-          <IconComponent className={cn(iconVariants({ size }), "")} />
-        </div>
-      );
+    if (iconName in icons) {
+      IconComponent = icons[iconName as keyof typeof icons];
+    } else if (iconName in customIcons) {
+      IconComponent = customIcons[iconName as keyof typeof customIcons];
     } else {
-      return (
-        <div
-          className={cn(
-            `flex items-center justify-center`,
-            round ? "rounded-full p-2" : "",
-            className
-          )}
-        >
-          <Image
-            priority
-            src={customIcons[iconName]}
-            className={cn(iconVariants({ size }))}
-            alt="Pas de données"
-          />
-        </div>
-      );
+      return null;
     }
+
+    return (
+      <div
+        className={cn(
+          `flex items-center justify-center`,
+          round ? "rounded-full p-2" : "",
+          className
+        )}
+      >
+        <IconComponent className={cn(iconVariants({ size }))} />
+      </div>
+    );
   };
 
   return tooltip ? (

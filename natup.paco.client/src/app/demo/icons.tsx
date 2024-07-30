@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
-import { Label } from "recharts";
 
 export default function Icons() {
   return (
@@ -25,19 +24,19 @@ export default function Icons() {
 
             <Icon
               iconName="Wheat"
-              className="text-yellow-800 bg-yellow-300"
+              className="text-wheat-foreground bg-wheat"
               size={"small"}
               round
             ></Icon>
             <Icon
               iconName="Wheat"
               size={"default"}
-              className="text-yellow-800 bg-yellow-300"
+              className="text-wheat-foreground bg-wheat"
               round
             ></Icon>
             <Icon
               iconName="Wheat"
-              className="text-yellow-800 bg-yellow-300"
+              className="text-wheat-foreground bg-wheat"
               size={"large"}
               round
             ></Icon>
@@ -62,45 +61,55 @@ export default function Icons() {
         </CardHeader>
         <CardContent>
           <div className="flex gap-6 items-center flex-wrap w-">
-            <Icon iconName="beet" tooltip="Betterave" size={"default"}></Icon>
-            <Icon
-              iconName="potato"
-              tooltip="Pomme de terre"
-              size={"default"}
-            ></Icon>
-            <Icon iconName="cow" tooltip="Bovins" size={"default"}></Icon>
-            <Icon iconName="sheep" tooltip="Ovins" size={"default"}></Icon>
+            <Icon iconName="Potato" size={"default"} />
+            <Icon iconName="Beet" size={"default"} />
+            <Icon iconName="Cow" size={"default"} />
+            <Icon iconName="Sheep" size={"default"} />
+            <Icon iconName="CO2" size={"default"} />
+            <Icon iconName="Engrais_protection" size={"default"} />
+            <Icon iconName="Engrais" size={"default"} />
+            <Icon iconName="Granules" size={"default"} />
+            <Icon iconName="Seed" size={"default"} />
+            <Icon iconName="Plant" size={"default"} />
+            <Icon iconName="Toolsgarden" size={"default"} />
+            <Icon iconName="Ficelle" size={"default"} />
           </div>
           <br></br>
           <div className="flex gap-2 items-center flex-wrap w-">
             <Icon
-              iconName="beet"
+              iconName="Beet"
               tooltip="Betterave"
-              size={"small"}
+              size={"default"}
               round
-              className="bg-beet"
+              className="bg-beet text-beet-foreground"
             ></Icon>
             <Icon
-              iconName="potato"
+              iconName="Potato"
               tooltip="Pomme de terre"
-              size={"small"}
+              size={"default"}
               round
-              className="bg-potato"
+              className="bg-potato text-potato-foreground"
             ></Icon>
             <Icon
-              iconName="cow"
+              iconName="Cow"
               tooltip="Bovins"
-              size={"small"}
+              size={"default"}
               round
-              className="bg-cow"
+              className="bg-cow text-cow-foreground"
             ></Icon>
             <Icon
-              iconName="sheep"
+              iconName="Sheep"
               tooltip="Ovins"
-              size={"small"}
+              size={"default"}
               round
-              className="bg-sheep"
+              className="bg-sheep text-sheep-foreground"
             ></Icon>
+            <Icon
+              iconName="Plant"
+              size={"default"}
+              round
+              className="bg-green-100"
+            />
           </div>
         </CardContent>
       </Card>

@@ -79,7 +79,10 @@ const config = {
         sheep: {
           DEFAULT: "hsl(var(--sheep))",
           foreground: "hsl(var(--sheep-foreground))",
-        },     
+        },
+        vegetables: {
+          DEFAULT: "hsl(var(--vegetables))",
+        },
         blue: {
           50: "#F0FCFF",
           100: "#D4F7FF",

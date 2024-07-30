@@ -1,7 +1,6 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
 import * as React from "react";
 import { Label as LabelRechart, Pie, PieChart } from "recharts";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,7 +8,6 @@ import Nodata from "@/assets/nodata.svg";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -86,7 +84,7 @@ export default function Pies() {
         <CardContent>
           <div className="flex flex-col space-y-4 text-center">
             <div className="self-center">
-              <Image priority src={Nodata} alt="Pas de données" />
+              <Nodata />
             </div>
             <Label>Pas de contrat pour la récolte sélectionnée</Label>
             <Label size={"small"}>
