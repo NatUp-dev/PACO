@@ -175,7 +175,12 @@ export default function Bars() {
               <ChartTooltip />
 
               {dataKeys.map((key, index) => (
-                <Bar dataKey={key} fill={`var(--color-${key})`} radius={4} />
+                <Bar
+                  key={key}
+                  dataKey={key}
+                  fill={`var(--color-${key})`}
+                  radius={4}
+                />
               ))}
 
               <ChartLegend

@@ -300,22 +300,20 @@ const ChartLegendContent = React.forwardRef<
 
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
-          const customLegendElement = customLegend ? (
-            <span className="font-bold text-base">
+          const customLegendElement = customLegend && (
+            <span className="font-bold text-base" key={key}>
               {item.payload?.value} {customUnit}
             </span>
-          ) : (
-            <></>
           );
 
           return (
             <div
+              key={item.value}
               className={cn(
                 customLegend ? "flex w-full justify-between gap-x-8" : ""
               )}
             >
               <div
-                key={item.value}
                 className={cn(
                   "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground "
                 )}

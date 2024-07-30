@@ -39,7 +39,7 @@ const badgeVariants = cva(
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
-  icon: keyof typeof icons | IconName;
+  icon?: keyof typeof icons | IconName;
 }
 
 function Badge({ className, variant, size, icon, ...props }: BadgeProps) {
@@ -48,7 +48,7 @@ function Badge({ className, variant, size, icon, ...props }: BadgeProps) {
       className={cn("flex gap-1", badgeVariants({ variant, size }), className)}
       {...props}
     >
-      <Icon iconName={icon} size={"small"}></Icon>
+      {icon && <Icon iconName={icon} size={"small"}></Icon>}
       {props.children}
     </div>
   );

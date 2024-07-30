@@ -14,7 +14,7 @@ export default function Cards() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tags d'états</CardTitle>
+        <CardTitle>Tags d&apos;états</CardTitle>
         <CardDescription>All tags avalaible</CardDescription>
       </CardHeader>
       <CardContent>
