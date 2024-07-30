@@ -36,9 +36,9 @@ interface IconProps {
 const iconVariants = cva("", {
   variants: {
     size: {
-      small: "h-4 w-4",
-      default: "h-6 w-6",
-      large: "h-8 w-8",
+      small: "h-3 w-3",
+      default: "h-4 w-4",
+      large: "h-5 w-5",
     },
     defaultVariants: { size: "default" },
   },
@@ -75,7 +75,13 @@ const Icon: React.FC<IconProps & VariantProps<typeof iconVariants>> = ({
       );
     } else {
       return (
-        <div className="self-center">
+        <div
+          className={cn(
+            `flex items-center justify-center`,
+            round ? "rounded-full p-2" : "",
+            className
+          )}
+        >
           <Image
             priority
             src={customIcons[iconName]}

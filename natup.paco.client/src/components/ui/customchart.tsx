@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Icon from "@/components/ui/icon";
+import { cn } from "@/lib/utils";
 
 interface CustomChartProps {
   data: any;
@@ -28,60 +29,11 @@ import {
 } from "recharts";
 
 const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
-  // type ChartDataItem = {
-  //   type: string;
-  //   delivered: number;
-  //   todeliver: number;
-
-  //   [key: string]: number | string;
-  // };
-
-  // const chartData: ChartDataItem[] = [
-  //   { type: "babylou", delivered: 0, todeliver: 228.85 },
-  //   { type: "calantis", delivered: 27.04, todeliver: 19.3 },
-  //   { type: "hansa", delivered: 27.04, todeliver: 19.3 },
-  //   { type: "pablo", delivered: 27.04, todeliver: 19.3 },
-  //   { type: "perline", delivered: 278.84, todeliver: 50 },
-  // ];
-
-  const oldConfig = {
-    delivered: {
-      color: "hsl(var(--chart-1))",
-      label: "Livré",
-    },
-    todeliver: {
-      color: "hsl(var(--chart-2))",
-      label: "Reste à livrer",
-    },
-    babylou: {
-      color: "#95C413",
-      label: "Babyloulou",
-    },
-    calantis: {
-      color: "#95C413",
-      label: "Calantis",
-    },
-    hansa: {
-      color: "#95C413",
-      label: "Hansa",
-    },
-    pablo: {
-      color: "#95C413",
-      label: "Pablo",
-    },
-    perline: {
-      color: "#95C413",
-      label: "Perline",
-    },
-  };
-
   // Obtenez les clés des données
   const dataKeys =
     data.length > 0 ? Object.keys(data[0]).filter((key) => key !== "type") : [];
 
   const testConfig = { conf } satisfies ChartConfig;
-
-  // console.log(testConfig);
 
   const customizedGroupTick = (props: any) => {
     const { index, x, y, payload } = props;
@@ -97,13 +49,18 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
     const customLegend = (
       <div className="flex justify-between items-center gap-2">
         {/* Colonne TITRE */}
-        <div className="flex items-center gap-2 w-3/4">
-          <Icon
-            iconName={conf[payload.value as keyof typeof conf]?.icon}
-            round
-            className="text-yellow-600 bg-orange-200"
-          ></Icon>
-          <span className="text-xl text-gray-700 font-bold">
+        <div className="flex items-center gap-2 w-3/4 ">
+          <div className="flex justify-center h-[30px] w-[30px] ">
+            <Icon
+              iconName={conf[payload.value as keyof typeof conf]?.icon}
+              round
+              size={"small"}
+              className={cn(
+                conf[payload.value as keyof typeof conf]?.className
+              )}
+            ></Icon>
+          </div>
+          <span className="text-lg text-gray-700 font-bold">
             {conf[payload.value as keyof typeof conf]?.label}
           </span>
         </div>
@@ -112,7 +69,10 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
           <div className="flex flex-col w-fit ">
             <span className="text-xs text-gray-500  w-fit">TOTAL</span>
             <span className="text-sm font-semibold text-gray-800  w-fit">
-              {totalc}
+              {totalc.toLocaleString("fr-FR", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+              })}
             </span>
           </div>
         </div>
@@ -182,15 +142,13 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
   ) : (
     <div>
       <ChartContainer
-        config={oldConfig}
+        config={conf}
         className="w-full"
         style={{ height: `${data.length * 60 + 62}px` }}
       >
         <BarChart
           layout="vertical"
           data={data}
-          //barCategoryGap={7}
-          //barGap={8}
           barSize={30}
           margin={{
             left: 200,
@@ -198,14 +156,11 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
         >
           <CartesianGrid />
 
-          {/* Horizontal */}
-          {/* <XAxis dataKey="type" tickLine axisLine />
-              <YAxis tickLine axisLine /> */}
-
           {/* Vertical */}
           <XAxis
             type="number"
             tickLine={false}
+            minTickGap={80}
             axisLine={false}
             scale="log"
             domain={[1, "auto"]}
@@ -216,7 +171,6 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
             type="category"
             tickLine={false}
             axisLine={false}
-            //tickFormatter={(value) => value}
             tickMargin={40}
             tick={customizedGroupTick}
           />
@@ -229,30 +183,39 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
             className="justify-end"
           />
 
-          {dataKeys.map((key, index) => (
-            <Bar
-              key={index}
-              dataKey={key}
-              stackId="a"
-              fill={`var(--color-${key})`}
-              radius={[
-                index > 0 ? 0 : 6,
-                index == dataKeys.length - 1 ? 6 : 0,
-                index == dataKeys.length - 1 ? 6 : 0,
-                index > 0 ? 0 : 6,
-              ]}
-              className="h-4"
-              // barSize={30}
-            >
-              <LabelList
+          {dataKeys.map((key, index) => {
+            const isFirst =
+              index === 0 || (index > 0 && data[index - 1].key == 0);
+            const isLast =
+              index == dataKeys.length - 1 ||
+              (index < dataKeys.length - 1 && data[index + 1].key == 0);
+
+            return (
+              <Bar
+                key={index}
                 dataKey={key}
-                position="insideLeft"
-                offset={8}
-                className="fill-[white]"
-                fontSize={12}
-              />
-            </Bar>
-          ))}
+                stackId="a"
+                fill={`var(--color-${key})`}
+                radius={
+                  isFirst && isLast
+                    ? [6, 6, 6, 6]
+                    : isFirst
+                    ? [6, 0, 0, 6]
+                    : isLast
+                    ? [0, 6, 6, 0]
+                    : [0, 0, 0, 0]
+                }
+              >
+                <LabelList
+                  dataKey={key}
+                  position="insideLeft"
+                  offset={8}
+                  className="fill-[white]"
+                  fontSize={12}
+                />
+              </Bar>
+            );
+          })}
 
           <XAxis
             dataKey="type"

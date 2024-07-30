@@ -24,20 +24,29 @@ import {
 } from "@/components/ui/chart";
 
 const chartData = [
-  { contract: "LIDL", visitors: 22, value: "okOK", fill: "#00677E" },
+  { contract: "LIDL", visitors: 22, fill: "#00677E" },
   {
-    contract: "Boeuf fermier du maine",
+    contract: "boeufMaine",
     visitors: 12,
     fill: "#95C413",
   },
   {
-    contract: "Label rouge multiraces",
+    contract: "labelRouge",
     visitors: 8,
     fill: "#14AFD1",
   },
 ];
 
 const chartConfig = {
+  boeufMaine: {
+    label: "Boeuf fermier du maine",
+  },
+  labelRouge: {
+    label: "Label rouge multiraces",
+  },
+  LIDL: {
+    label: "LIDL",
+  },
   visitors: {
     label: "Visitors",
   },
@@ -69,7 +78,7 @@ export default function Pies() {
   }, []);
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div className="grid md:grid-cols-2 gap-4">
       <Card>
         <CardHeader>
           <CardTitle>Pas de donnée</CardTitle>
@@ -123,7 +132,7 @@ export default function Pies() {
         <CardHeader className="pb-0">
           <CardTitle>Exemple</CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 pb-0">
+        <CardContent>
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[450px]"
@@ -138,7 +147,7 @@ export default function Pies() {
                 dataKey="visitors"
                 nameKey="contract"
                 paddingAngle={2}
-                innerRadius={70}
+                innerRadius={"40%"}
                 cornerRadius={8}
               >
                 <LabelRechart
@@ -171,8 +180,17 @@ export default function Pies() {
                   }}
                 />
               </Pie>
-              {/* <ChartLegend content={<ChartLegendContent nameKey="contract"/>} /> */}
-              <ChartLegend layout="vertical" />
+              <ChartLegend
+                layout="vertical"
+                content={
+                  <ChartLegendContent
+                    nameKey="contract"
+                    customLegend
+                    customUnit="têtes"
+                  />
+                }
+                className="flex-col items-start gap-1"
+              />
             </PieChart>
           </ChartContainer>
         </CardContent>

@@ -30,6 +30,18 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --turquoise: 179 89% 40%;
+    --wheat: 55 100% 93%;
+    --wheat-foreground: 35 92% 33%;
+    --carrot: 36 92% 87%;
+    --carrot-foreground: 32 85% 52%;
+    --beet: 299 52% 92%;
+    --beet-foreground: 292 51% 50%;
+    --potato: 25 43% 87%;
+    --potato-foreground: 25 55% 38%;
+    --cow: 25 43% 87%;
+    --cow-foreground: 25 55% 38%;
+    --sheep: 33 100% 96%;
+    --sheep-foreground: 25 95% 53%;
   }
 
   .dark {

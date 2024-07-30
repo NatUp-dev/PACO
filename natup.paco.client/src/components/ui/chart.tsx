@@ -264,10 +264,20 @@ const ChartLegendContent = React.forwardRef<
     Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
       hideIcon?: boolean;
       nameKey?: string;
+      customLegend?: boolean;
+      customUnit?: string;
     }
 >(
   (
-    { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
+    {
+      className,
+      hideIcon = false,
+      payload,
+      verticalAlign = "bottom",
+      nameKey,
+      customLegend,
+      customUnit,
+    },
     ref
   ) => {
     const { config } = useChart();
@@ -290,24 +300,45 @@ const ChartLegendContent = React.forwardRef<
 
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
+          const customLegendElement = customLegend ? (
+            <span className="font-bold text-base">
+              {item.payload?.value} {customUnit}
+            </span>
+          ) : (
+            <></>
+          );
+
           return (
             <div
-              key={item.value}
               className={cn(
-                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+                customLegend ? "flex w-full justify-between gap-x-8" : ""
               )}
             >
-              {itemConfig?.icon && !hideIcon ? (
-                <itemConfig.icon />
-              ) : (
-                <div
-                  className="h-3 w-3 shrink-0 rounded-full"
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                />
-              )}
-              <span className="text-sm">{itemConfig?.label}</span>
+              <div
+                key={item.value}
+                className={cn(
+                  "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground "
+                )}
+              >
+                {itemConfig?.icon && !hideIcon ? (
+                  <itemConfig.icon />
+                ) : (
+                  <div
+                    className="h-3 w-3 shrink-0 rounded-full"
+                    style={{
+                      backgroundColor: item.color,
+                    }}
+                  />
+                )}
+                <span className="text-sm">{itemConfig?.label}</span>
+              </div>
+              <div
+                style={{
+                  color: item.color,
+                }}
+              >
+                {customLegendElement}
+              </div>
             </div>
           );
         })}
