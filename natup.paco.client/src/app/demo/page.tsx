@@ -1,62 +1,51 @@
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React from "react";
-import Buttons from "./buttons";
-import Labels from "./labels";
-import Inputs from "./inputs";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Selects from "./selects";
-import Checkboxs from "./checkboxs";
-import Radios from "./radios";
-import Switchs from "./switchs";
-import Icons from "./icons";
-import Tags from "./tags";
 
 export default function Demo() {
   return (
-    <div className="px-20 py-10">
-      <div className="pb-10 uppercase">
-        Components <span className="text-blue-500">!</span>
+    <div>
+      <div className="flex w-full uppercase justify-center items-center mt-52">
+        Demo time <span className="text-blue-500">!</span>
       </div>
-      <div className="flex flex-col gap-10">
-        <Tabs defaultValue="buttons" className="w-full">
-          <TabsList>
-            <TabsTrigger value="buttons">Button</TabsTrigger>
-            <TabsTrigger value="labels">Label</TabsTrigger>
-            <TabsTrigger value="inputs">Input</TabsTrigger>
-            <TabsTrigger value="selects">Select</TabsTrigger>
-            <TabsTrigger value="checkboxs">Checkbox</TabsTrigger>
-            <TabsTrigger value="radios">Radio</TabsTrigger>
-            <TabsTrigger value="switchs">Switch</TabsTrigger>
-            <TabsTrigger value="icons">Icons</TabsTrigger>
-            <TabsTrigger value="tags">Tags</TabsTrigger>
-          </TabsList>
-          <TabsContent value="buttons">
-            <Buttons />
-          </TabsContent>
-          <TabsContent value="labels">
-            <Labels />
-          </TabsContent>
-          <TabsContent value="inputs">
-            <Inputs />
-          </TabsContent>
-          <TabsContent value="selects">
-            <Selects />
-          </TabsContent>
-          <TabsContent value="checkboxs">
-            <Checkboxs />
-          </TabsContent>
-          <TabsContent value="radios">
-            <Radios />
-          </TabsContent>
-          <TabsContent value="switchs">
-            <Switchs />
-          </TabsContent>
-          <TabsContent value="icons">
-            <Icons />
-          </TabsContent>
-          <TabsContent value="tags">
-            <Tags />
-          </TabsContent>
-        </Tabs>
+      <div className="flex gap-5 items-center justify-center mt-20">
+        <Card className="w-52">
+          <CardHeader>
+            <CardTitle>Components</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6">
+              <div className="grid gap-3">
+                <Link
+                  className={cn(buttonVariants({ variant: "outline" }))}
+                  href="/demo/components"
+                >
+                  Accéder
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="w-52">
+          <CardHeader>
+            <CardTitle>Charts</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6">
+              <div className="grid gap-3">
+                <Link
+                  className={cn(buttonVariants({ variant: "outline" }))}
+                  href="/demo/charts"
+                >
+                  Accéder
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
