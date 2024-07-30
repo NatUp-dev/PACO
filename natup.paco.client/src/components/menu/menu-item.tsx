@@ -32,7 +32,7 @@ export default function MenuItem({
       )}
       <TooltipProvider>
         <Tooltip delayDuration={50} disableHoverableContent={true}>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Link
               className={cn(
                 "flex items-center justify-start h-9 text-gray-600 truncate gap-2 px-2.5 hover:bg-gray-50 rounded-[50px]",

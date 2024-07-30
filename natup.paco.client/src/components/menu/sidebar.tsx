@@ -1,10 +1,9 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
 import logomini from "@/assets/logo_mini.svg";
-import { Separator } from "@/components/ui/separator";
 import { ChevronsRight, icons } from "lucide-react";
 import Help from "./help";
 import MenuItem from "./menu-item";
@@ -14,16 +13,21 @@ import BottomMenuItem from "./bottom-menu-item";
 import { useSidebarToggle } from "../hooks/use-sidebar-toggle";
 import { useStore } from "../hooks/use-store";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
+  const params = useParams();
+  const [activeMenu, setActiveMenu] = useState<string | undefined>();
 
   type MenuType = {
+    key: string;
     section: string;
     items: MenuItemType[];
   };
 
   type MenuItemType = {
+    key: string;
     icon: keyof typeof icons;
     text: string;
     link: string;
@@ -31,38 +35,55 @@ export function Sidebar() {
 
   const menu: MenuType[] = [
     {
+      key: "activites",
       section: "Activités",
       items: [
         {
+          key: "suivi-de-collectes",
           icon: "PieChart",
           text: "Suivi de collectes",
-          link: "/",
+          link: "/activites/suivi-de-collectes",
         },
         {
+          key: "comptabilite",
           icon: "Wallet",
           text: "Comptabilité",
-          link: "/",
+          link: "/activites/comptabilite",
         },
         {
+          key: "commandes",
           icon: "ClipboardList",
           text: "Commandes",
-          link: "/",
+          link: "/activites/commandes",
         },
         {
+          key: "documents",
           icon: "File",
           text: "Documents",
-          link: "/",
+          link: "/activites/documents",
         },
       ],
     },
   ];
+  useEffect(() => {
+    const parent = menu.find(
+      (menu) => menu.key === window.location.pathname.split("/")[1]
+    );
+    const child = parent?.items.find(
+      (menuItem) => menuItem.key === window.location.pathname.split("/")[2]
+    );
+
+    if (child) {
+      setActiveMenu(child.key);
+    }
+  }, [params]);
 
   if (!sidebar) return null;
 
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 z-20 h-screen ease-in-out duration-200 mt-1.5",
+        "hidden lg:block fixed top-0 left-0 z-20 h-screen ease-in-out duration-200 mt-1.5",
         sidebar.isOpen === false ? "w-16" : "w-[212px]"
       )}
     >
@@ -90,30 +111,27 @@ export function Sidebar() {
               )}
             />
           </Link>
-          {/* <Separator /> */}
         </div>
         <div className="flex flex-col text-sm justify-between h-full">
           <div className="flex flex-col gap-2 mt-[-10px]">
             <div>
               {menu.map((item) => {
                 return (
-                  <>
-                    <MenuSection
-                      text={item.section}
-                      key={item.section}
-                      isOpen={sidebar.isOpen}
-                    />
+                  <Fragment key={item.section}>
+                    <MenuSection text={item.section} isOpen={sidebar.isOpen} />
                     {item.items.map((menuItem) => {
                       return (
                         <MenuItem
+                          key={menuItem.link}
                           icon={menuItem.icon}
                           text={menuItem.text}
                           link={menuItem.link}
                           isOpen={sidebar.isOpen}
+                          isSelected={menuItem.key === activeMenu}
                         />
                       );
                     })}
-                  </>
+                  </Fragment>
                 );
               })}
             </div>
@@ -123,12 +141,12 @@ export function Sidebar() {
             <div>
               <BottomMenuItem
                 text="Mentions légales"
-                link="/"
+                link="/informations/mentions-legales"
                 isOpen={sidebar.isOpen}
               />
               <BottomMenuItem
                 text="Politique de confidentialité"
-                link="/"
+                link="/informations/politique-confidentialite"
                 isOpen={sidebar.isOpen}
               />
             </div>

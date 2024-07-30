@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={montserrat.className}>
+      <body className={cn(montserrat.className, "debug-screens")}>
         <div className="bg-natup-gradient h-1.5 w-full"></div>
         {children}
       </body>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -9,29 +9,39 @@ import { SelectValue } from "@radix-ui/react-select";
 import { Wheat } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import CollecteNavigationLink from "./collecte-navigation-link";
+import CollecteSelectItem from "./collecte-select-item";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function CollecteHeader({ type }: { type: string }) {
-  const [selected, setSelected] = React.useState("light");
+  const params = useParams();
+  const router = useRouter();
+  const baseUrl = "/activites/suivi-de-collectes";
 
   const defaultNavigation = [
     {
+      key: "synthese",
       name: "Synthèse",
       link: "/synthese",
     },
     {
+      key: "livraisons",
       name: "Livraisons",
       link: "/livraisons",
     },
     {
+      key: "contrats",
       name: "Contrats",
       link: "/contrats",
     },
     {
+      key: "paiements",
       name: "Paiements",
       link: "/paiements",
     },
   ];
-
   const navigation = [
     {
       type: "grains",
@@ -42,14 +52,17 @@ export default function CollecteHeader({ type }: { type: string }) {
       nav: [
         ...defaultNavigation,
         {
+          key: "achats",
           name: "Achats",
           link: "/achats",
         },
         {
+          key: "planifications",
           name: "Planifications",
           link: "/planifications",
         },
         {
+          key: "financements",
           name: "Financements",
           link: "/financements",
         },
@@ -64,57 +77,64 @@ export default function CollecteHeader({ type }: { type: string }) {
       nav: defaultNavigation,
     },
   ];
-
   const filteredNavigation = navigation.filter((item) => item.type === type);
 
+  const isActive = (value: any) => params.slug[1] === value;
+
+  const handleCollecteTypeChange = (value: string) => {
+    router.push(`${baseUrl}/${value}/synthese`);
+  };
+
   return (
-    <div className="flex items-center w-full h-12 shadow-sm ps-7 gap-[18px]">
-      <Select defaultValue={"light"}>
-        <SelectTrigger className="w-[180px] h-8 bg-blue-700 text-blue-50 rounded-lg">
-          <SelectValue defaultValue={"light"} />
-        </SelectTrigger>
-        <SelectContent className="bg-blue-700 text-blue-50">
-          <SelectItem value="light" withCheck={false}>
-            <div className="flex items-center gap-2 px-1.5">
-              <Wheat className="h-3.5 w-3.5" />
-              <div>Collecte grains</div>
-            </div>
-          </SelectItem>
-          <SelectItem value="dark" withCheck={false}>
-            <div className="flex items-center gap-2 px-1.5">
-              <Wheat className="h-3.5 w-3.5" />
-              <div>Collecte ovins</div>
-            </div>
-          </SelectItem>
-          <SelectItem value="system" withCheck={false}>
-            <div className="flex items-center gap-2 px-1.5">
-              <Wheat className="h-3.5 w-3.5" />
-              <div>Collecte bovins</div>
-            </div>
-          </SelectItem>
-          <SelectItem value="other" withCheck={false}>
-            <div className="flex items-center gap-2 px-1.5">
-              <Wheat className="h-3.5 w-3.5" />
-              <div>Collecte légumes</div>
-            </div>
-          </SelectItem>
-        </SelectContent>
-      </Select>
-      <div className="flex gap-4 text-sm font-medium">
-        {filteredNavigation.map((item) =>
-          item.nav.map((navItem) => (
-            <div className="relative flex flex-col">
-              <Link
-                className={cn("px-4 py-2", "text-blue-700")}
-                href={navItem.link}
-              >
-                {navItem.name}
-              </Link>
-              <div className="absolute w-full bg-blue-600 h-0.5 rounded-t-md bottom-0 mb-[-6px]"></div>
-            </div>
-          ))
-        )}
+    <ScrollArea className="shadow-sm">
+      <div className="flex items-center w-full h-12 ps-7 gap-[18px]">
+        <Select
+          defaultValue={params.slug[0]}
+          onValueChange={handleCollecteTypeChange}
+        >
+          <SelectTrigger className="min-w-52 max-w-52 h-8 bg-blue-700 text-blue-50 rounded-lg">
+            <SelectValue defaultValue={"light"} />
+          </SelectTrigger>
+          <SelectContent className="bg-blue-700 text-blue-50">
+            <CollecteSelectItem
+              icon="Wheat"
+              text="Collecte grains"
+              value="grains"
+            />
+            <CollecteSelectItem
+              icon="Wheat"
+              text="Collecte ovins"
+              value="ovins"
+            />
+            <CollecteSelectItem
+              icon="Wheat"
+              text="Collecte bovins"
+              value="bovins"
+            />
+            <CollecteSelectItem
+              icon="Leaf"
+              text="Collecte légumes"
+              value="legumes"
+            />
+          </SelectContent>
+        </Select>
+        <div className="flex gap-4 text-sm font-medium">
+          {filteredNavigation.map((item, index) => (
+            <Fragment key={`${item.type}_${index}`}>
+              {item.nav.map((navItem) => (
+                <div className="relative flex flex-col" key={navItem.key}>
+                  <CollecteNavigationLink
+                    isActive={isActive(navItem.key)}
+                    text={navItem.name}
+                    link={`${baseUrl}/${params.slug[0]}${navItem.link}`}
+                  />
+                </div>
+              ))}
+            </Fragment>
+          ))}
+        </div>
       </div>
-    </div>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   );
 }
