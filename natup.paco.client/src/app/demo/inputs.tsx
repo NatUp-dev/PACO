@@ -142,7 +142,7 @@ export default function Inputs() {
                         className="text-blue-600 underline text-sm"
                         onClick={() => setDate(new Date())}
                       >
-                        Aujourd'hui
+                        Aujourd&apos;hui
                       </Button>
                     </div>
                   }
@@ -174,7 +174,7 @@ export default function Inputs() {
                         className="text-blue-600 underline text-sm"
                         onClick={() => setDate(new Date())}
                       >
-                        Aujourd'hui
+                        Aujourd&apos;hui
                       </Button>
                     </div>
                   }
@@ -207,7 +207,7 @@ export default function Inputs() {
                         className="text-blue-600 underline text-sm"
                         onClick={() => setDate(new Date())}
                       >
-                        Aujourd'hui
+                        Aujourd&apos;hui
                       </Button>
                     </div>
                   }

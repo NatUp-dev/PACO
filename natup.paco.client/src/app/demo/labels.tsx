@@ -24,7 +24,7 @@ export default function Labels() {
         </div>
         <div className="text-xs py-2">required</div>
         <div className="flex gap-6 items-center">
-          <Label required>Label d'un champ requis</Label>
+          <Label required>Label d&apos;un champ requis</Label>
         </div>
       </CardContent>
     </Card>

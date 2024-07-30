@@ -37,7 +37,7 @@ const HelpContent = ({ className }: { className?: string }) => {
     >
       <div className="flex items-center gap-2 text-green-950 text-base font-medium">
         <Headset className="h-[18px] w-[18px] text-green-700" />
-        Besoin d'aide ?
+        Besoin d&pos;aide ?
       </div>
       <div className="text-green-950 font-medium text-xs text-center">
         <div>Contacter notre support</div>
