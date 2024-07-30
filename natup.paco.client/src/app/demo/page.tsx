@@ -7,6 +7,8 @@ import Selects from "./selects";
 import Checkboxs from "./checkboxs";
 import Radios from "./radios";
 import Switchs from "./switchs";
+import Icons from "./icons";
+import Tags from "./tags";
 
 export default function Demo() {
   return (
@@ -24,6 +26,8 @@ export default function Demo() {
             <TabsTrigger value="checkboxs">Checkbox</TabsTrigger>
             <TabsTrigger value="radios">Radio</TabsTrigger>
             <TabsTrigger value="switchs">Switch</TabsTrigger>
+            <TabsTrigger value="icons">Icons</TabsTrigger>
+            <TabsTrigger value="tags">Tags</TabsTrigger>
           </TabsList>
           <TabsContent value="buttons">
             <Buttons />
@@ -45,6 +49,12 @@ export default function Demo() {
           </TabsContent>
           <TabsContent value="switchs">
             <Switchs />
+          </TabsContent>
+          <TabsContent value="icons">
+            <Icons />
+          </TabsContent>
+          <TabsContent value="tags">
+            <Tags />
           </TabsContent>
         </Tabs>
       </div>

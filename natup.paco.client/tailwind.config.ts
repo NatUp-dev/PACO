@@ -52,6 +52,37 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        turquoise: {
+          DEFAULT: "hsl(var(--turquoise))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        wheat: {
+          DEFAULT: "hsl(var(--wheat))",
+          foreground: "hsl(var(--wheat-foreground))",
+        },
+        carrot: {
+          DEFAULT: "hsl(var(--carrot))",
+          foreground: "hsl(var(--carrot-foreground))",
+        },
+        beet: {
+          DEFAULT: "hsl(var(--beet))",
+          foreground: "hsl(var(--beet-foreground))",
+        },   
+        potato: {
+          DEFAULT: "hsl(var(--potato))",
+          foreground: "hsl(var(--potato-foreground))",
+        }, 
+        cow: {
+          DEFAULT: "hsl(var(--cow))",
+          foreground: "hsl(var(--cow-foreground))",
+        },
+        sheep: {
+          DEFAULT: "hsl(var(--sheep))",
+          foreground: "hsl(var(--sheep-foreground))",
+        },
+        vegetables: {
+          DEFAULT: "hsl(var(--vegetables))",
+        },
         blue: {
           50: "#F0FCFF",
           100: "#D4F7FF",
