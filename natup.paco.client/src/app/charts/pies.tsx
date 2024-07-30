@@ -84,7 +84,7 @@ export default function Pies() {
         <CardContent>
           <div className="flex flex-col space-y-4 text-center">
             <div className="self-center">
-              <Nodata />
+              <Nodata className="w-64 h-48" />
             </div>
             <Label>Pas de contrat pour la récolte sélectionnée</Label>
             <Label size={"small"}>
