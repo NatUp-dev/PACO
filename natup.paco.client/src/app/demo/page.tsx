@@ -46,6 +46,25 @@ export default function Demo() {
             </div>
           </CardContent>
         </Card>
+        <Card className="w-52">
+          <CardHeader>
+            <CardTitle>
+              PACO<span className="text-blue-500">!</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6">
+              <div className="grid gap-3">
+                <Link
+                  className={cn(buttonVariants({ variant: "default" }))}
+                  href="/activites/suivi-de-collectes"
+                >
+                  Accéder
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

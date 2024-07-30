@@ -2,8 +2,8 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
-import logo from "@/assets/logo.svg";
-import logomini from "@/assets/logo_mini.svg";
+import Logo from "@/assets/logo.svg";
+import LogoMini from "@/assets/logo_mini.svg";
 import { ChevronsRight, icons } from "lucide-react";
 import Help from "./help";
 import MenuItem from "./menu-item";
@@ -90,25 +90,19 @@ export function Sidebar() {
       <div className="relative h-full flex flex-col px-3 py-4 gap-2 shadow-md dark:shadow-zinc-800">
         <div className="flex flex-col items-center pt-0 px-2.5 pb-3 h-16">
           <Link href="/" className="h-14 flex justify-center">
-            <Image
-              priority
-              src={logo}
-              alt="logo natup"
-              height={36}
+            <Logo
               className={cn(
-                "absolute",
+                "absolute h-9 w-full",
                 sidebar.isOpen ? "opacity-100" : "opacity-0 hidden"
               )}
-            />
-            <Image
-              priority
-              src={logomini}
               alt="logo natup"
-              height={36}
+            />
+            <LogoMini
               className={cn(
-                "absolute",
+                "absolute h-9 w-full",
                 sidebar.isOpen ? "opacity-0 hidden" : "opacity-100"
               )}
+              alt="logo natup"
             />
           </Link>
         </div>
