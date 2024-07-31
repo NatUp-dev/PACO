@@ -21,7 +21,7 @@ const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   TooltipContentProps
 >(({ className, sideOffset = 4, isOpenable, ...props }, ref) => {
-  return isOpenable ? (
+  return isOpenable == undefined || isOpenable == true ? (
     <TooltipPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
