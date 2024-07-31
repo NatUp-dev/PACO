@@ -11,7 +11,7 @@ import Icon from "@/components/ui/icon";
 import DataCard from "@/components/ui/datacard";
 export default function DataCards() {
   return (
-    <Card className="bg-neutral-100">
+    <Card className="bg-gray-100">
       <CardHeader>
         <CardTitle>Data Cards</CardTitle>
         <CardDescription>Data Cards</CardDescription>
@@ -54,9 +54,6 @@ export default function DataCards() {
           />
           <DataCard title="Loading" data={0} icon="Wheat" loading />
           <DataCard empty loading />
-          <code>
-            <pre></pre>
-          </code>
         </div>
       </CardContent>
     </Card>

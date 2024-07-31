@@ -73,19 +73,17 @@ const DataCard: React.FC<DataCardProps> = ({
             <div className="text-xs">{subtitle}</div>
             <div className="h-6 mb-1">
               {data ? (
-                <>
-                  <span className="font-bold text-2xl">
-                    {data && (isCurrency || progress)
-                      ? data.toLocaleString("fr-FR", {
-                          minimumFractionDigits: 0,
-                          maximumFractionDigits: 2,
-                        })
-                      : data.toLocaleString("fr-FR", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                  </span>
-                </>
+                <span className="font-bold text-2xl">
+                  {data && (isCurrency || progress)
+                    ? data.toLocaleString("fr-FR", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                      })
+                    : data.toLocaleString("fr-FR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                </span>
               ) : (
                 <span className="font-extrabold text-2xl">-</span>
               )}{" "}
