@@ -53,7 +53,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="w-full flex justify-around items-center px-7 h-[68px] shadow-sm">
+      <div className="w-full flex justify-around items-center px-7 h-[68px] shadow-sm bg-white">
         <div className="hidden md:flex w-full flex-col justify-start">
           <div className="text-gray-500 text-xs font-medium">
             {titles?.title}

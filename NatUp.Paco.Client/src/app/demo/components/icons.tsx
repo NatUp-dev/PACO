@@ -45,6 +45,7 @@ export default function Icons() {
               iconName="Carrot"
               className="text-carrot-foreground bg-carrot"
               round
+              tooltip="Carrot"
             ></Icon>
 
             <Icon iconName="TriangleAlert"></Icon>

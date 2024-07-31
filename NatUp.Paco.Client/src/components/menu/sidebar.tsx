@@ -83,7 +83,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "hidden lg:block fixed top-0 left-0 z-20 h-screen ease-in-out duration-200 mt-1.5",
+        "hidden lg:block fixed top-0 left-0 z-20 h-screen ease-in-out duration-200 mt-1.5 bg-white",
         sidebar.isOpen === false ? "w-16" : "w-[212px]"
       )}
     >

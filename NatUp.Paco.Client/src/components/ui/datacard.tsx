@@ -50,17 +50,17 @@ const DataCard: React.FC<DataCardProps> = ({
       <Plus />
     </div>
   ) : (
-    <div className="rounded-xl border bg-card text-card-foreground shadow-sm content-center h-32 w-full">
+    <div className="rounded-xl bg-card text-card-foreground shadow-sm content-center h-32 w-full p-6">
       {!loading ? (
-        <div className="flex justify-between  gap-4 p-6 ">
+        <div className="flex justify-between gap-4 items-center">
           {/* Col 1 */}
           <div className="w-full">
-            <div className="text-xs text-gray-500 flex items-center gap-1">
+            <div className="text-[10px] text-gray-500 flex items-center gap-1">
               <span className="uppercase">{title}</span>
               {tooltip && (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                       <Info className="w-4" />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -74,14 +74,14 @@ const DataCard: React.FC<DataCardProps> = ({
             <div className="h-6 mb-1">
               {data ? (
                 <>
-                  <span className="font-extrabold text-2xl">
-                    {data && isCurrency
+                  <span className="font-bold text-2xl">
+                    {data && (isCurrency || progress)
                       ? data.toLocaleString("fr-FR", {
-                          minimumFractionDigits: 2,
+                          minimumFractionDigits: 0,
                           maximumFractionDigits: 2,
                         })
                       : data.toLocaleString("fr-FR", {
-                          minimumFractionDigits: 0,
+                          minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
                         })}
                   </span>
@@ -95,7 +95,7 @@ const DataCard: React.FC<DataCardProps> = ({
           </div>
           {/* Col 2 */}
           <div className="content-center">
-            <div className="size-12 bg-turquoise rounded-md flex justify-center items-center text-white">
+            <div className="size-12 bg-turquoise rounded-lg flex justify-center items-center text-white">
               <IconComponent className="w-4" />
             </div>
           </div>
