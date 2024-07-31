@@ -12,6 +12,7 @@ import Tags from "./tags";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import Toasts from "./toasts";
 
 export default function Demo() {
   return (
@@ -39,6 +40,7 @@ export default function Demo() {
             <TabsTrigger value="switchs">Switch</TabsTrigger>
             <TabsTrigger value="icons">Icons</TabsTrigger>
             <TabsTrigger value="tags">Tags</TabsTrigger>
+            <TabsTrigger value="toast">Toast</TabsTrigger>
           </TabsList>
           <TabsContent value="buttons">
             <Buttons />
@@ -66,6 +68,9 @@ export default function Demo() {
           </TabsContent>
           <TabsContent value="tags">
             <Tags />
+          </TabsContent>
+          <TabsContent value="toast">
+            <Toasts />
           </TabsContent>
         </Tabs>
       </div>

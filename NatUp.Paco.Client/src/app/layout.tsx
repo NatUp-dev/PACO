@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,6 +26,18 @@ export default function RootLayout({
       <body className={cn(montserrat.className, "debug-screens")}>
         <div className="bg-natup-gradient h-1.5 w-full"></div>
         {children}
+        <Toaster
+          visibleToasts={4}
+          position="top-right"
+          closeButton
+          toastOptions={{
+            closeButton: true,
+            duration: 3000,
+            classNames: {
+              toast: "right-0",
+            },
+          }}
+        />
       </body>
     </html>
   );
