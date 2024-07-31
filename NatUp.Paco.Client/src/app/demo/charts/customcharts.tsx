@@ -23,8 +23,8 @@ export default function CustomCharts() {
     },
     babylou: {
       label: "Babylou",
-      icon: "potato",
-      className: "bg-potato",
+      icon: "Potato",
+      className: "bg-potato text-potato-foreground",
     },
     calantis: {
       label: "Calantis",
@@ -33,18 +33,18 @@ export default function CustomCharts() {
     },
     hansa: {
       label: "Hansa",
-      icon: "potato",
-      className: "bg-potato",
+      icon: "Potato",
+      className: "bg-potato text-potato-foreground",
     },
     pablo: {
       label: "Pablo",
-      icon: "beet",
-      className: "bg-beet",
+      icon: "Beet",
+      className: "bg-beet text-beet-foreground",
     },
     perline: {
       label: "Perline",
-      icon: "potato",
-      className: "bg-potato",
+      icon: "Potato",
+      className: "bg-potato text-potato-foreground",
     },
   };
 

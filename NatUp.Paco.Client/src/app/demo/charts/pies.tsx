@@ -79,7 +79,7 @@ export default function Pies() {
     <div className="grid md:grid-cols-2 gap-4">
       <Card>
         <CardHeader>
-          <CardTitle>Pas de donnée</CardTitle>
+          <CardTitle>Pas de données</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col space-y-4 text-center">
