@@ -1,14 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select";
+import React, { Fragment } from "react";
+import { Select, SelectContent, SelectTrigger } from "@/components/ui/select";
 import { SelectValue } from "@radix-ui/react-select";
-import { Wheat } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import CollecteNavigationLink from "./collecte-navigation-link";
@@ -86,55 +78,57 @@ export default function CollecteHeader({ type }: { type: string }) {
   };
 
   return (
-    <ScrollArea className="shadow-sm bg-white">
-      <div className="flex items-center w-full h-12 ps-7 gap-[18px]">
-        <Select
-          defaultValue={params.slug[0]}
-          onValueChange={handleCollecteTypeChange}
-        >
-          <SelectTrigger className="min-w-52 max-w-52 h-8 bg-blue-700 text-blue-50 rounded-lg">
-            <SelectValue defaultValue={"light"} />
-          </SelectTrigger>
-          <SelectContent className="bg-blue-700 text-blue-50">
-            <CollecteSelectItem
-              icon="Wheat"
-              text="Collecte grains"
-              value="grains"
-            />
-            <CollecteSelectItem
-              icon="Wheat"
-              text="Collecte ovins"
-              value="ovins"
-            />
-            <CollecteSelectItem
-              icon="Wheat"
-              text="Collecte bovins"
-              value="bovins"
-            />
-            <CollecteSelectItem
-              icon="Leaf"
-              text="Collecte légumes"
-              value="legumes"
-            />
-          </SelectContent>
-        </Select>
-        <div className="flex gap-4 text-sm font-medium">
-          {filteredNavigation.map((item, index) => (
-            <Fragment key={`${item.type}_${index}`}>
-              {item.nav.map((navItem) => (
-                <div className="relative flex flex-col" key={navItem.key}>
-                  <CollecteNavigationLink
-                    isActive={isActive(navItem.key)}
-                    text={navItem.name}
-                    link={`${baseUrl}/${params.slug[0]}${navItem.link}`}
-                  />
-                </div>
-              ))}
-            </Fragment>
-          ))}
+    <div className="sticky top-1.5">
+      <ScrollArea className="shadow-sm">
+        <div className="flex items-center w-full h-12 ps-7 gap-[18px] bg-white top-0">
+          <Select
+            defaultValue={params.slug[0]}
+            onValueChange={handleCollecteTypeChange}
+          >
+            <SelectTrigger className="min-w-52 max-w-52 h-8 bg-blue-700 text-blue-50 rounded-lg">
+              <SelectValue defaultValue={"light"} />
+            </SelectTrigger>
+            <SelectContent className="bg-blue-700 text-blue-50">
+              <CollecteSelectItem
+                icon="Wheat"
+                text="Collecte grains"
+                value="grains"
+              />
+              <CollecteSelectItem
+                icon="Wheat"
+                text="Collecte ovins"
+                value="ovins"
+              />
+              <CollecteSelectItem
+                icon="Wheat"
+                text="Collecte bovins"
+                value="bovins"
+              />
+              <CollecteSelectItem
+                icon="Leaf"
+                text="Collecte légumes"
+                value="legumes"
+              />
+            </SelectContent>
+          </Select>
+          <div className="flex gap-4 text-sm font-medium">
+            {filteredNavigation.map((item, index) => (
+              <Fragment key={`${item.type}_${index}`}>
+                {item.nav.map((navItem) => (
+                  <div className="relative flex flex-col" key={navItem.key}>
+                    <CollecteNavigationLink
+                      isActive={isActive(navItem.key)}
+                      text={navItem.name}
+                      link={`${baseUrl}/${params.slug[0]}${navItem.link}`}
+                    />
+                  </div>
+                ))}
+              </Fragment>
+            ))}
+          </div>
         </div>
-      </div>
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+    </div>
   );
 }

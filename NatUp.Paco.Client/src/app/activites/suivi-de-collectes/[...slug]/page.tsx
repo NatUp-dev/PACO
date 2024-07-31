@@ -22,7 +22,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
           Indicateurs
         </Label>
 
-        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 h-screen">
           <DataCard
             title="Livraisons"
             data={18650.2}

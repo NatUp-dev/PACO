@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={cn(montserrat.className, "debug-screens")}>
-        <div className="bg-natup-gradient h-1.5 w-full"></div>
+        <div className="bg-natup-gradient h-1.5 w-full fixed top-0 z-50"></div>
         {children}
         <Toaster
           visibleToasts={4}
