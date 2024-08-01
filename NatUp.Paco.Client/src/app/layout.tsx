@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import GoToTop from "@/components/ui/gototop";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
             },
           }}
         />
+        <GoToTop />
       </body>
     </html>
   );
