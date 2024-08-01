@@ -17,12 +17,7 @@ export default function GoToTop() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(scrollY);
-  }, [scrollY]);
-
   const handleClick = () => {
-    //scroo to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
