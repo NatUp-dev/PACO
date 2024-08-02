@@ -78,9 +78,9 @@ export default function CollecteHeader({ type }: { type: string }) {
   };
 
   return (
-    <div className="sticky top-1.5 z-10">
+    <div className="sticky top-[68px] md:sticky md:top-1.5 z-10">
       <ScrollArea className="shadow-sm">
-        <div className="flex items-center w-full h-12 ps-7 gap-[18px] bg-white top-0">
+        <div className="flex items-center w-full h-12 ps-3.5 md:ps-7 gap-[18px] bg-white top-0">
           <Select
             defaultValue={params.slug[0]}
             onValueChange={handleCollecteTypeChange}

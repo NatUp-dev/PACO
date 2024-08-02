@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Page() {
-  return <div>Comptabilité</div>;
+  return <div className="relative top-[68px] md:top-0">Comptabilité</div>;
 }

@@ -21,8 +21,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
         <Label size={"large"} className="font-bold">
           Indicateurs
         </Label>
-
-        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <DataCard
             title="Livraisons"
             data={18650.2}
