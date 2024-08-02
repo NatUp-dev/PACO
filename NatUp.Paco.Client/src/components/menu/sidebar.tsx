@@ -30,14 +30,12 @@ export function Sidebar() {
                 "absolute h-9 w-full",
                 sidebar.isOpen ? "opacity-100" : "opacity-0 hidden"
               )}
-              alt="logo natup"
             />
             <LogoMini
               className={cn(
                 "absolute h-9 w-full",
                 sidebar.isOpen ? "opacity-0 hidden" : "opacity-100"
               )}
-              alt="logo natup"
             />
           </Link>
         </div>
