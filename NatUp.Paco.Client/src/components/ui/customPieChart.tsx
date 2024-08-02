@@ -3,12 +3,11 @@
 import * as React from "react";
 import { Label as LabelRechart, Pie, PieChart } from "recharts";
 import Image from "next/image";
-import Nodata from "@/assets/nodata.svg";
+import Nodata from "@/assets/nodata.svg?url";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
