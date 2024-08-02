@@ -69,7 +69,7 @@ export default function Datalists() {
   return (
     <Card className="bg-gray-100">
       <CardHeader>
-        <CardTitle>Data list</CardTitle>
+        <CardTitle>Data List</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid lg:grid-cols-3 gap-4">

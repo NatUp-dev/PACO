@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Datalists from "./datalists";
+import Datatables from "./datatables";
 
 export default function tables() {
   return (
@@ -17,16 +18,20 @@ export default function tables() {
           Retour
         </Link>
         <div>
-          Charts <span className="text-blue-500">!</span>
+          Tables & Listes <span className="text-blue-500">!</span>
         </div>
       </div>
       <div className="flex flex-col gap-10">
-        <Tabs defaultValue="datacard" className="w-full">
+        <Tabs defaultValue="datatable" className="w-full">
           <TabsList>
+            <TabsTrigger value="datatable">Data Table</TabsTrigger>
             <TabsTrigger value="datacard">Data Card</TabsTrigger>
-            <TabsTrigger value="datalist">Data list</TabsTrigger>
+            <TabsTrigger value="datalist">Data List</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="datatable">
+            <Datatables />
+          </TabsContent>
           <TabsContent value="datacard">
             <DataCards />
           </TabsContent>
