@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
+import Icon from "./icon";
 
 interface DataCardProps {
   title?: string;
@@ -60,8 +61,8 @@ const DataCard: React.FC<DataCardProps> = ({
               {tooltip && (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Info className="w-4" />
+                    <TooltipTrigger>
+                      <Icon size={"default"} iconName="Info" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>{tooltip}</p>

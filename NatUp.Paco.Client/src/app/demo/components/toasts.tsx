@@ -13,7 +13,7 @@ import { toastme } from "@/components/ui/toast";
 
 export default function Toasts() {
   const handleSuccessToast = () => {
-    toastme({ title: "Succés", text: "Exemple de toast de succés !" });
+    toastme({ title: "Succès", text: "Exemple de toast de succès !" });
   };
 
   const handleErrorToast = () => {
@@ -26,8 +26,8 @@ export default function Toasts() {
 
   const handleSuccessActionToast = () => {
     toastme({
-      title: "Succés",
-      text: "Exemple de toast de succés !",
+      title: "Succès",
+      text: "Exemple de toast de succès !",
       action: () => console.log("Action"),
     });
   };
