@@ -1,36 +1,15 @@
 "use client";
 
 import * as React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  ChevronUp,
-  ChevronDown,
-  ChevronsUpDown,
-  MoreHorizontal,
-} from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable, DataTableColumnHeader } from "@/components/ui/datatable";
 
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TableData>[] = [
   {
     accessorKey: "categorie",
     header: ({ column }) => (
@@ -87,6 +66,15 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Montant net (HT)" />
     ),
+  },
+  {
+    accessorKey: "subTable",
+    header: "",
+    cell: ({ row }) => {
+      return (
+        <span>{row.getIsExpanded() ? <ChevronUp /> : <ChevronDown />}</span>
+      );
+    },
   },
 ];
 

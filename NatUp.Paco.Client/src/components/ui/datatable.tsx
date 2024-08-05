@@ -103,6 +103,7 @@ export function DataTable<CustomData, TValue>({
       },
     },
   });
+
   return (
     <div>
       <div
@@ -133,14 +134,6 @@ export function DataTable<CustomData, TValue>({
                     </TableHead>
                   );
                 })}
-                {!isSubTable && (
-                  <TableHead
-                    className={cn(
-                      "bg-gray-200",
-                      stickyClassName ? `sticky ${stickyClassName} z-50` : ""
-                    )}
-                  ></TableHead>
-                )}
               </TableRow>
             ))}
           </TableHeader>
@@ -159,7 +152,7 @@ export function DataTable<CustomData, TValue>({
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
-                        className={cn(isSubTable && index == 0 ? "pt-0 " : "")}
+                        className={cn(isSubTable && index === 0 ? "pt-0 " : "")}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
@@ -167,26 +160,12 @@ export function DataTable<CustomData, TValue>({
                         )}
                       </TableCell>
                     ))}
-                    {/* {row.getCanExpand() && ( */}
-                    {!isSubTable && (
-                      <TableCell>
-                        {
-                          <span>
-                            {row.getIsExpanded() ? (
-                              <ChevronUp />
-                            ) : (
-                              <ChevronDown />
-                            )}
-                          </span>
-                        }
-                      </TableCell>
-                    )}
                   </TableRow>
 
                   {row.getIsExpanded() && (
                     <TableRow>
                       <TableCell colSpan={columns.length + 1} className="p-0">
-                        {row.original.subTable}
+                        {row.getValue("subTable")}
                       </TableCell>
                     </TableRow>
                   )}
