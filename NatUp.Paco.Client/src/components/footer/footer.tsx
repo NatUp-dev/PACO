@@ -10,15 +10,21 @@ import {
 
 export default function Footer() {
   return (
-    <div className="w-full px-7 pt-0.5 pb-2 ">
+    <div className="w-full px-7 pt-0.5 pb-10 md:pb-2 mt-[68px] md:mt-0">
       <div className="flex flex-col md:flex-row items-center justify-between border-t border-gray-300 text-gray-500">
         <div className=" font-normal text-sm py-3">
-          <div>
-            © Copyright{" "}
-            <a className="underline" href="https://natup.coop">
-              NatUp
-            </a>{" "}
-            - 2024 - Tous droits réservés
+          <div className="flex flex-col md:flex-row">
+            <div className="text-center">
+              © Copyright{" "}
+              <a className="underline" href="https://natup.coop">
+                NatUp
+              </a>{" "}
+              - 2024
+            </div>
+            <div className="text-center flex justify-center">
+              <span className="hidden md:block">&nbsp;-&nbsp;</span>Tous droits
+              réservés
+            </div>
           </div>
         </div>
         <div className="flex items-center justify-between gap-2.5">

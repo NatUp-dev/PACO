@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ExploitationSelect from "./exploitation-select";
 import { useParams } from "next/navigation";
+import { Menu } from "lucide-react";
+import { Button } from "../ui/button";
+import Logo from "@/assets/logo.svg?url";
+import Image from "next/image";
+import BurgerMenu from "./burger-menu";
+import Link from "next/link";
 
 type HeaderTitleType = {
   key: string;
@@ -43,6 +49,7 @@ export default function Header() {
       subtitle: "Politique de confidentialité",
     },
   ];
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const result = headerTitle.find((headerTitle) =>
@@ -53,7 +60,20 @@ export default function Header() {
 
   return (
     <>
-      <div className="w-full flex justify-around items-center px-7 h-[68px] shadow-sm bg-white border-b border-b-gray-100">
+      <div className="z-10 fixed md:relative top-0 w-full flex justify-between md:justify-around items-center px-3 md:px-7 h-[68px] shadow-sm bg-white border-b border-b-gray-100">
+        <div className="md:hidden flex items-center gap-4">
+          <Button
+            className="bg-transparent border-0 hover:bg-transparent p-0"
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <Menu className="w-6 text-gray-700" />
+          </Button>
+          <div className="flex items-center">
+            <Link href="/" className="h-14 flex justify-center">
+              <Image src={Logo} alt="logo natup" className="w-20.5" />
+            </Link>
+          </div>
+        </div>
         <div className="hidden md:flex w-full flex-col justify-start">
           <div className="text-gray-500 text-xs font-medium">
             {titles?.title}
@@ -62,10 +82,11 @@ export default function Header() {
             {titles?.subtitle}
           </div>
         </div>
-        <div className="w-full flex justify-end">
+        <div className="flex justify-end">
           <ExploitationSelect />
         </div>
       </div>
+      <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }

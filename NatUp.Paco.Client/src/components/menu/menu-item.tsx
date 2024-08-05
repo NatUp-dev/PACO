@@ -16,6 +16,7 @@ export default function MenuItem({
   className,
   isOpen,
   isSelected,
+  customOnClick,
 }: {
   icon: keyof typeof icons;
   text: string;
@@ -23,6 +24,7 @@ export default function MenuItem({
   className?: string;
   isOpen?: boolean;
   isSelected?: boolean;
+  customOnClick?: () => void;
 }) {
   const LucideIcon = icons[icon];
   return (
@@ -41,6 +43,7 @@ export default function MenuItem({
                 className
               )}
               href={link}
+              onClick={customOnClick}
             >
               <LucideIcon
                 className={cn(
