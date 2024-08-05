@@ -15,511 +15,192 @@ import {
   ChevronsUpDown,
   MoreHorizontal,
 } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTable } from "@/components/ui/datatable";
+import { DataTable, DataTableColumnHeader } from "@/components/ui/datatable";
+
+import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "dateApport",
-    header: "Date d'apport",
-  },
-  {
-    accessorKey: "numBon",
-    //header: "N° de bon",
-    header: ({ column }) => {
-      var sort = column.getIsSorted();
+    accessorKey: "categorie",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Catégorie" />
+    ),
+    cell: ({ row }) => {
+      const val = row.getValue("categorie");
 
       return (
-        <a
-          className="flex items-center hover:text-gray-800 hover:cursor-pointer"
-          onClick={() => column.toggleSorting(sort === "asc")}
-        >
-          N° de bon{" "}
-          {sort === "asc" ? (
-            <ChevronUp className="ml-2 h-4 w-4" />
-          ) : sort === "desc" ? (
-            <ChevronDown className="ml-2 h-4 w-4" />
-          ) : (
-            <ChevronsUpDown className="ml-2 h-4 w-4" />
-          )}
-        </a>
+        <Badge variant="cow" icon="Cow">
+          Boucherie
+        </Badge>
       );
     },
   },
   {
-    accessorKey: "ticket",
-    header: "Ticket de pesée",
+    accessorKey: "dateApport",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Date d'apport" />
+    ),
   },
-  { accessorKey: "famille", header: "Famille" },
-  { accessorKey: "typeContrat", header: "Type de contrat" },
-  { accessorKey: "poidsBrut", header: "Poids brut (T)" },
-  { accessorKey: "poidsNormes", header: "Poids aux normes (T)" },
-  { accessorKey: "montant", header: "Montant net (HT)" },
+  {
+    accessorKey: "numBon",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="N° de bon" />
+    ),
+  },
+  {
+    accessorKey: "ticket",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Ticket de pesée" />
+    ),
+  },
+  {
+    accessorKey: "famille",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Famille" />
+    ),
+  },
+  {
+    accessorKey: "poidsBrut",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Poids brut (T)" />
+    ),
+  },
+  {
+    accessorKey: "poidsNormes",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Poids aux normes (T)" />
+    ),
+  },
+  {
+    accessorKey: "montant",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Montant net (HT)" />
+    ),
+  },
 ];
 
+// Define columns for the DataTable
+const subColumns: ColumnDef<Details>[] = [
+  {
+    header: "Date Commande",
+    accessorKey: "dateCommande",
+  },
+  {
+    header: "Num Commande",
+    accessorKey: "numCommande",
+  },
+  {
+    header: "Prix Unitaire",
+    accessorKey: "prixUnitaire",
+  },
+  {
+    header: "Etat",
+    accessorKey: "etat",
+  },
+];
+
+export type Details = {
+  dateCommande: string;
+  numCommande: string;
+  prixUnitaire: string;
+  etat: "pending" | "delivered" | "partial" | "canceled";
+};
+
 export type Payment = {
+  categorie: string;
   dateApport: string;
   numBon: number;
   ticket: string;
   famille: string;
-  typeContrat: string;
-  poidsBrut: number;
-  poidsNormes: number;
-  montant: number;
+  poidsBrut: string;
+  poidsNormes: string;
+  montant: string;
+  details: Details[];
 };
 
-const data: Payment[] = [
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24579,
-    ticket: "1000000",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24580,
-    ticket: "1000001",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24581,
-    ticket: "1000002",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24582,
-    ticket: "1000003",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24583,
-    ticket: "1000004",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24584,
-    ticket: "1000005",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24585,
-    ticket: "1000006",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24586,
-    ticket: "1000007",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24587,
-    ticket: "1000008",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24579,
-    ticket: "1000000",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24580,
-    ticket: "1000001",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24581,
-    ticket: "1000002",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24582,
-    ticket: "1000003",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24583,
-    ticket: "1000004",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24584,
-    ticket: "1000005",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24585,
-    ticket: "1000006",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24586,
-    ticket: "1000007",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24587,
-    ticket: "1000008",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24579,
-    ticket: "1000000",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24580,
-    ticket: "1000001",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24581,
-    ticket: "1000002",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24582,
-    ticket: "1000003",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24583,
-    ticket: "1000004",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24584,
-    ticket: "1000005",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24585,
-    ticket: "1000006",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24586,
-    ticket: "1000007",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24583,
-    ticket: "1000004",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24584,
-    ticket: "1000005",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24585,
-    ticket: "1000006",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24586,
-    ticket: "1000007",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24587,
-    ticket: "1000008",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24588,
-    ticket: "1000009",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24589,
-    ticket: "1000010",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24590,
-    ticket: "1000011",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24591,
-    ticket: "1000012",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24592,
-    ticket: "1000013",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24593,
-    ticket: "1000014",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24594,
-    ticket: "1000015",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24595,
-    ticket: "1000016",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24596,
-    ticket: "1000017",
-    famille: "Blé",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24597,
-    ticket: "1000018",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24598,
-    ticket: "1000019",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24599,
-    ticket: "1000020",
-    famille: "Orge",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-  {
-    dateApport: "Mr. 16 sept. 23",
-    numBon: 24600,
-    ticket: "1000021",
-    famille: "Colza",
-    typeContrat: "PULSEO TERME",
-    poidsBrut: 17,
-    poidsNormes: 17,
-    montant: 500,
-  },
-];
+interface TableData extends Payment {
+  subTable: React.JSX.Element;
+}
 
 export default function Datatables() {
+  //   const [data, setData] = useState<Payment[]>([]);
+  const [tableData, setTableData] = useState<TableData[]>([]);
+
+  useEffect(() => {
+    const fakeData: Payment[] = [];
+
+    for (let index = 0; index < 45; index++) {
+      fakeData.push({
+        categorie: "animal",
+        dateApport: "Mar. 16 sept. 23",
+        numBon: 24579 + index,
+        ticket: "100000" + index.toString(),
+        famille: "Blé",
+        poidsBrut: (Math.random() * 17).toLocaleString(),
+        poidsNormes: (Math.random() * 17).toLocaleString(),
+        montant: (Math.random() * 500).toLocaleString(),
+        details: [
+          {
+            dateCommande: "12 juin 2024",
+            numCommande: "CC260697" + index.toString(),
+            prixUnitaire: "122,39 €",
+            etat: "delivered",
+          },
+          {
+            dateCommande: "12 juin 2024",
+            numCommande: "CC260698" + index.toString(),
+            prixUnitaire: "122,39 €",
+            etat: "pending",
+          },
+          {
+            dateCommande: "12 juin 2024",
+            numCommande: "CC260699" + index.toString(),
+            prixUnitaire: "122,39 €",
+            etat: "canceled",
+          },
+        ],
+      });
+    }
+
+    // Mapping Payment data to TableData
+    const tableDataWithSubTable = fakeData.map((payment) => ({
+      ...payment,
+      subTable: (
+        <DataTable
+          isSubTable
+          data={payment.details}
+          columns={subColumns}
+          pagination={false}
+        />
+      ),
+    }));
+
+    setTableData(tableDataWithSubTable);
+  }, []);
+
   return (
     <Card className="bg-gray-100">
       <CardHeader>
         <CardTitle>Data Table</CardTitle>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={data} />
+        <DataTable
+          columns={columns}
+          data={tableData}
+          stickyClassName="top-[6px]"
+          pagination
+        />
       </CardContent>
     </Card>
   );
