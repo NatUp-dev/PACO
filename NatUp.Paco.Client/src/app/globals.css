@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth !important;
+}
+
 @layer base {
   :root {
     --background: 60 0% 96%;
@@ -38,11 +42,11 @@
     --beet-foreground: 292 51% 50%;
     --potato: 25 43% 87%;
     --potato-foreground: 25 55% 38%;
-    --vegetables:55 97% 88%;
+    --vegetables: 55 97% 88%;
     --cow: 25 43% 87%;
     --cow-foreground: 25 55% 38%;
     --sheep: 33 100% 96%;
-    --sheep-foreground: 25 95% 53%;    
+    --sheep-foreground: 25 95% 53%;
   }
 
   .dark {

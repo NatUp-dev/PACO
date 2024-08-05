@@ -67,11 +67,11 @@ const config = {
         beet: {
           DEFAULT: "hsl(var(--beet))",
           foreground: "hsl(var(--beet-foreground))",
-        },   
+        },
         potato: {
           DEFAULT: "hsl(var(--potato))",
           foreground: "hsl(var(--potato-foreground))",
-        }, 
+        },
         cow: {
           DEFAULT: "hsl(var(--cow))",
           foreground: "hsl(var(--cow-foreground))",
@@ -187,6 +187,7 @@ const config = {
       backgroundImage: {
         "natup-gradient":
           "linear-gradient(90deg, #B8D04E 0%, #A4C750 30%, #95BF63 43%, #81BB76 58%, #48B49C 70%, #14AFBF 82%, #00ADCD 88%, #00B4DC 93%, #00C0F3 100%)",
+        "go-to-top": "url('../assets/gototop.svg')",
       },
     },
   },
