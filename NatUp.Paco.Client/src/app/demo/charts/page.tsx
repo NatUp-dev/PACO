@@ -26,7 +26,6 @@ export default function charts() {
           <TabsList>
             <TabsTrigger value="pie">Pie Chart</TabsTrigger>
             <TabsTrigger value="bar">Bar Chart</TabsTrigger>
-            <TabsTrigger value="datacard">Data Card</TabsTrigger>
             <TabsTrigger value="customchart">Custom Chart</TabsTrigger>
           </TabsList>
           <TabsContent value="pie">

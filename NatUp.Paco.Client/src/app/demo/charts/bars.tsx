@@ -44,7 +44,7 @@ type ChartDataItem = {
 
 export default function Bars() {
   const chartData: ChartDataItem[] = [
-    { type: "ble", "2021": 100100, "2022": 312, "2023": 498 },
+    { type: "ble", "2021": 150, "2022": 312, "2023": 498 },
     { type: "orge", "2021": 245, "2022": 491, "2023": 499 },
     { type: "colza", "2021": 589, "2022": 301, "2023": 399 },
     { type: "pois", "2021": 224, "2022": 481, "2023": 499 },
@@ -100,55 +100,8 @@ export default function Bars() {
     },
   } satisfies ChartConfig;
 
-  const customizedGroupTick = (props: any) => {
-    const { index, x, y, payload } = props;
-    const current = chartData[index];
-    const totalc = dataKeys.reduce((sum, key) => {
-      const value = current[key];
-      if (typeof value === "number") {
-        return sum + value;
-      }
-      return sum;
-    }, 0);
-
-    const customLegend = (
-      <div className="flex justify-between items-center gap-2">
-        <div className="flex items-center gap-2 w-full">
-          <Icon iconName="Wheat" tooltip="yellow"></Icon>
-          <span className="text-xl text-gray-700 font-bold">
-            {chartConfig[payload.value as keyof typeof chartConfig]?.label}
-          </span>
-        </div>
-        <div className="flex  justify-end w-full pr-2">
-          <div className="flex flex-col w-fit">
-            <span className="text-xs text-gray-500  w-fit">TOTAL</span>
-            <span className="text-sm font-semibold text-gray-800  w-fit">
-              {totalc}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-
-    return (
-      <>
-        <g>
-          <foreignObject
-            x={x - 200}
-            y={y - 20}
-            width="240px"
-            height="3.5em"
-            className=""
-          >
-            {customLegend}
-          </foreignObject>
-        </g>
-      </>
-    );
-  };
-
   return (
-    <div className="grid sm:grid-cols-1 gap-4">
+    <div className="grid sm:grid-cols-2 gap-4">
       <Card>
         <CardHeader className="pb-0">
           <CardTitle>Prix moyen pondéré (€/T) </CardTitle>
@@ -192,89 +145,7 @@ export default function Bars() {
           </ChartContainer>
         </CardContent>
       </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Prix moyen pondéré (€/T)</CardTitle>
-        </CardHeader>
-        <CardContent className="flex-1 pb-0">
-          <ChartContainer config={chartConfig} className="w-full">
-            <BarChart
-              layout="vertical"
-              data={chartData}
-              margin={{
-                left: 200,
-              }}
-            >
-              <CartesianGrid />
 
-              {/* Horizontal */}
-              {/* <XAxis dataKey="type" tickLine axisLine />
-              <YAxis tickLine axisLine /> */}
-
-              {/* Vertical */}
-              <XAxis type="number" tickLine={false} axisLine={false} />
-              <YAxis
-                dataKey="type"
-                type="category"
-                tickLine={true}
-                axisLine={true}
-                //tickFormatter={(value) => value}
-                tickMargin={40}
-                tick={customizedGroupTick}
-              />
-
-              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar
-                dataKey="2021"
-                stackId="a"
-                fill="var(--color-2021)"
-                radius={[4, 0, 0, 4]}
-              >
-                <LabelList
-                  dataKey="2021"
-                  position="insideLeft"
-                  offset={8}
-                  className="fill-[white]"
-                  fontSize={12}
-                />
-              </Bar>
-              <Bar dataKey="2022" stackId="a" fill="var(--color-2022)">
-                <LabelList
-                  dataKey="2022"
-                  position="insideLeft"
-                  offset={8}
-                  className="fill-[white]"
-                  fontSize={12}
-                />
-              </Bar>
-              <Bar
-                dataKey="2023"
-                stackId="a"
-                fill="var(--color-2023)"
-                radius={[0, 4, 4, 0]}
-              >
-                <LabelList
-                  dataKey="2023"
-                  position="insideLeft"
-                  offset={8}
-                  className="fill-[white]"
-                  fontSize={12}
-                />
-              </Bar>
-              <XAxis
-                dataKey="type"
-                tickFormatter={(value) =>
-                  chartConfig[value as keyof typeof chartConfig]?.label
-                }
-                tickLine={false}
-                axisLine={false}
-              />
-              <YAxis tickLine tickMargin={20} axisLine={true} hide />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
       <Card>
         <CardHeader>
           <CardTitle>Prix moyen pondéré (€/T)</CardTitle>

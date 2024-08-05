@@ -13,6 +13,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Toasts from "./toasts";
+import Carousels from "./carousels";
 
 export default function Demo() {
   return (
@@ -41,6 +42,7 @@ export default function Demo() {
             <TabsTrigger value="icons">Icons</TabsTrigger>
             <TabsTrigger value="tags">Tags</TabsTrigger>
             <TabsTrigger value="toast">Toast</TabsTrigger>
+            <TabsTrigger value="carousels">Carousel</TabsTrigger>
           </TabsList>
           <TabsContent value="buttons">
             <Buttons />
@@ -71,6 +73,9 @@ export default function Demo() {
           </TabsContent>
           <TabsContent value="toast">
             <Toasts />
+          </TabsContent>
+          <TabsContent value="carousels">
+            <Carousels />
           </TabsContent>
         </Tabs>
       </div>
