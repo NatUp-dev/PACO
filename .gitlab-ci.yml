@@ -4,13 +4,11 @@ image:
 
 stages:
   - build
-  - publish
-  - deploy
 
 build_backend:
   stage: build
   tags:
-    - dotnet_core
+    - dotnet-core
   before_script:
     - dotnet restore
   script:
@@ -21,7 +19,7 @@ build_backend:
 build_frontend:
   stage: build
   tags:
-    - dotnet_core
+    - dotnet-core
   image: node20:latest
   cache:
     paths:
@@ -30,148 +28,4 @@ build_frontend:
     - echo "Build de l'application NatUp.Paco.Client..."
     - cd NatUp.Paco.Client
     - npm ci
-    - npm run build:staging
-
-publish_backend_staging:
-  stage: publish
-  when: on_success
-  only:
-    - develop
-  tags:
-    - dotnet_core
-  before_script:
-    - dotnet restore
-  script:
-    - echo "Publication de l'application NatUp.Paco..."
-    - cd NatUp.Paco.API
-    - dotnet publish -c Release -o ./api -r win-x64 /p:EnvironmentName=Staging
-    - cd api
-    - echo "ZIP de la release de l'application NatUp.Paco..."
-    - zip -r "NatUp.Paco.API.zip" .
-  artifacts:
-    paths:
-      - NatUp.Paco.API/api/NatUp.Paco.API.zip
-    expire_in: 1 hrs
-
-publish_backend_production:
-  stage: publish
-  when: on_success
-  only:
-    - master
-  tags:
-    - dotnet_core
-  before_script:
-    - dotnet restore
-  script:
-    - echo "Publication de l'application NatUp.Paco..."
-    - cd NatUp.Paco.API
-    - dotnet publish -c Release -o ./api -r win-x64 /p:EnvironmentName=Production
-    - cd api
-    - echo "ZIP de la release de l'application NatUp.Paco..."
-    - zip -r "NatUp.Paco.API.zip" .
-  artifacts:
-    paths:
-      - NatUp.Paco.API/api/NatUp.Paco.API.zip
-    expire_in: 1 hrs
-
-publish_frontend_staging:
-  stage: publish
-  when: on_success
-  only:
-    - develop
-  tags:
-    - dotnet_core
-  image: node20:latest
-  cache:
-    paths:
-      - NatUp.Paco.Client/node_modules/
-  script:
-    - echo "Build de l'application NatUp.Paco.Client"
-    - cd NatUp.Paco.Client
-    - npm ci
-    - npm run build:staging
-    - cd dist
-    - echo "ZIP de la release de l'application NatUp.Paco.Client..."
-    - zip -r "NatUp.Paco.Client.zip" .
-  artifacts:
-    paths:
-      - NatUp.Paco.Client/dist/NatUp.Paco.Client.zip
-
-publish_frontend_production:
-  stage: publish
-  when: on_success
-  only:
-    - master
-  tags:
-    - dotnet_core
-  image: node20:latest
-  cache:
-    paths:
-      - NatUp.Paco.Client/node_modules/
-  script:
-    - echo "Build de l'application NatUp.Paco.Client"
-    - cd NatUp.Paco.Client
-    - npm ci
-    - npm run build:production
-    - cd dist
-    - echo "ZIP de la release de l'application NatUp.Paco.Client..."
-    - zip -r "NatUp.Paco.Client.zip" .
-  artifacts:
-    paths:
-      - NatUp.Paco.Client/dist/NatUp.Paco.Client.zip
-
-deploy_staging:
-  stage: deploy
-  dependencies:
-    - publish_frontend_staging
-    - publish_backend_staging
-  when: on_success
-  only:
-    - develop
-  retry: 2
-  tags:
-    - dotnet_core
-  script:
-    - echo "$SSH_PRIVATE_KEY_REC_GitLab" > /tmp/id_rsa
-    - chmod 600 /tmp/id_rsa
-    - echo "Execution du script Powershell de gestion du dossier de l'application"
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "& {D:/zz_Utils/root.ps1 -ApplicationName \"Template\" -ApplicationPath \"D:/DNC-APP-REC/\" -ArchivePath \"D:/zz_Archives\"}"'
-    - echo "Transfert des fichiers ZIP sur le serveur IIS..."
-    - scp -o StrictHostKeyChecking=no -i /tmp/id_rsa NatUp.Paco.API/api/NatUp.Paco.API.zip "svc_webapp-rec@srv-gar-webrec.area.local:/D:/DNC-APP-REC/Template/"
-    - scp -o StrictHostKeyChecking=no -i /tmp/id_rsa NatUp.Paco.Client/dist/NatUp.Paco.Client.zip "svc_webapp-rec@srv-gar-webrec.area.local:/D:/DNC-APP-REC/Template/"
-    - echo "Décompression des fichiers ZIP et déploiement..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "& {D:/zz_Utils/unzip.ps1 -Path \"D:/DNC-APP-REC/Template/NatUp.Paco.API.zip\" -DestinationPath \"D:/DNC-APP-REC/Template/api\" -Force}"'
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "& {D:/zz_Utils/unzip.ps1 -Path \"D:/DNC-APP-REC/Template/NatUp.Paco.Client.zip\" -Destination \"D:/DNC-APP-REC/Template\"}"'
-    - echo "Suppression des fichiers ZIP sur le serveur..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "Remove-Item -Path \"D:/DNC-APP-REC/Template/NatUp.Paco.API.zip\" -Force"'
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "Remove-Item -Path \"D:/DNC-APP-REC/Template/NatUp.Paco.Client.zip\" -Force"'
-    - echo "Redémarrage du site IIS..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_REC@$DEPLOY_SERVER_REC 'powershell -command "& {Import-Module WebAdministration; Stop-WebSite \"DNC-APP-REC\"; Start-WebSite \"DNC-APP-REC\"}"'
-
-deploy_production:
-  stage: deploy
-  dependencies:
-    - publish_frontend_production
-    - publish_backend_production
-  when: on_success
-  only:
-    - master
-  retry: 2
-  tags:
-    - dotnet_core
-  script:
-    - echo "$SSH_PRIVATE_KEY_PRD_GitLab" > /tmp/id_rsa
-    - chmod 600 /tmp/id_rsa
-    - echo "Execution du script Powershell de gestion du dossier de l'application"
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "& {D:/zz_Utils/root.ps1 -ApplicationName \"Template\" -ApplicationPath \"D:/DNC-APP-PRD/\" -ArchivePath \"D:/zz_Archives\"}"'
-    - echo "Transfert des fichiers ZIP sur le serveur IIS..."
-    - scp -o StrictHostKeyChecking=no -i /tmp/id_rsa NatUp.Paco.API/api/NatUp.Paco.API.zip "svc_webapp-prd@srv-gar-webprd.area.local:/D:/DNC-APP-PRD/Template/"
-    - scp -o StrictHostKeyChecking=no -i /tmp/id_rsa NatUp.Paco.Client/dist/NatUp.Paco.Client.zip "svc_webapp-prd@srv-gar-webprd.area.local:/D:/DNC-APP-PRD/Template/"
-    - echo "Décompression des fichiers ZIP et déploiement..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "& {D:/zz_Utils/unzip.ps1 -Path \"D:/DNC-APP-PRD/Template/NatUp.Paco.API.zip\" -DestinationPath \"D:/DNC-APP-PRD/Template/api\" -Force}"'
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "& {D:/zz_Utils/unzip.ps1 -Path \"D:/DNC-APP-PRD/Template/NatUp.Paco.Client.zip\" -Destination \"D:/DNC-APP-PRD/Template\"}"'
-    - echo "Suppression des fichiers ZIP sur le serveur..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "Remove-Item -Path \"D:/DNC-APP-PRD/Template/NatUp.Paco.API.zip\" -Force"'
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "Remove-Item -Path \"D:/DNC-APP-PRD/Template/NatUp.Paco.Client.zip\" -Force"'
-    - echo "Redémarrage du site IIS..."
-    - ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa $DEPLOY_USER_PRD@$DEPLOY_SERVER_PRD 'powershell -command "& {Import-Module WebAdministration; Stop-WebSite \"DNC-APP-PRD\"; Start-WebSite \"DNC-APP-PRD\"}"'
+    - npm run build
