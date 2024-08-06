@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import css from "styled-jsx/css";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -157,7 +158,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden py-2">
+    <div ref={carouselRef} className="overflow-hidden py-2 carouselFade">
       <div
         ref={ref}
         className={cn(
@@ -167,6 +168,24 @@ const CarouselContent = React.forwardRef<
         )}
         {...props}
       />
+
+      <style jsx>{`
+        .carouselFade::before {
+          content: "";
+          width: 2em;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          z-index: 5;
+          top: 0;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgb(249 250 251 / 1)
+          );
+          --tw-bg-opacity: 1;
+        }
+      `}</style>
     </div>
   );
 });
