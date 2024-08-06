@@ -7,12 +7,12 @@ import React from "react";
 
 export default function Demo() {
   return (
-    <div>
-      <div className="flex w-full uppercase justify-center items-center mt-52">
+    <div className="h-screen flex flex-col justify-center items-center gap-4 sm:gap-16 p-8">
+      <div className="flex w-full uppercase justify-center items-center">
         Demo time <span className="text-blue-500">!</span>
       </div>
-      <div className="flex gap-5 items-center justify-center mt-20">
-        <Card className="w-56">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center justify-center">
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Components</CardTitle>
           </CardHeader>
@@ -29,7 +29,7 @@ export default function Demo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-56">
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Charts</CardTitle>
           </CardHeader>
@@ -46,7 +46,7 @@ export default function Demo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-56">
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Tables & listes</CardTitle>
           </CardHeader>
@@ -63,7 +63,7 @@ export default function Demo() {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-56">
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>
               PACO<span className="text-blue-500">!</span>
