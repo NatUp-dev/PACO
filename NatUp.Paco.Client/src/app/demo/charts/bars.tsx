@@ -122,8 +122,8 @@ export default function Bars() {
               <YAxis
                 tickLine={false}
                 axisLine={false}
-                scale="log"
-                domain={["dataMin", "dataMax"]}
+                // scale="log"
+                // domain={["dataMin", "dataMax"]}
               />
               <ChartTooltip />
 

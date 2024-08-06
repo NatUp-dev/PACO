@@ -31,17 +31,19 @@ export default function Carousels() {
           className="w-full "
         >
           <CarouselContent>
-            {Array.from({ length: 32 }).map((_, index) => (
-              <CarouselItem key={index} className="basis-32">
+            {Array.from({ length: 45 }).map((_, index) => (
+              <CarouselItem key={index} className="basis-auto">
                 <Card className="rounded-xl shadow-md hover:bg-gray-100 cursor-pointer h-28 w-28">
-                  <CardContent className="flex aspect-square items-center justify-center p-0">
-                    <div>
-                      <div className="text-xs text-gray-500">JUILLET 2023</div>
-                      <div className="text-sm">
+                  <CardContent className="flex aspect-square items-center justify-center p-1">
+                    <div className="">
+                      <div className="text-xs text-gray-500 text-center">
+                        JUILLET 2023
+                      </div>
+                      <div className="text-sm text-center">
                         <span className="font-extrabold text-gray-700">
-                          50000,00
+                          93 918,96
                         </span>{" "}
-                        € HT.
+                        <span className="text-xs">€ HT.</span>
                       </div>
                     </div>
                   </CardContent>
