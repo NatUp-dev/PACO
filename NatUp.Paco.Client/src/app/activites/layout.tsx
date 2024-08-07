@@ -21,7 +21,7 @@ export default function Layout({
       <div
         className={cn(
           "transition-all duraction-500",
-          sidebar?.isOpen ? "lg:ml-[212px]" : "lg:ml-[64px]"
+          sidebar?.isOpen ? "md:ml-[212px]" : "md:ml-[64px]"
         )}
       >
         <Header />

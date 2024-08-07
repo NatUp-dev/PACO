@@ -39,7 +39,7 @@ export default function Carousels() {
                       <div className="text-xs text-gray-500">JUILLET 2023</div>
                       <div className="text-sm">
                         <span className="font-extrabold text-gray-700">
-                          50000,00
+                          500,00
                         </span>{" "}
                         € HT.
                       </div>

@@ -10,7 +10,7 @@ export default function Layout({
   return (
     <div>
       <CollecteHeader type="grains" />
-      <div className="relative top-12 md:top-0">{children}</div>
+      <div className="relative top-[68px] md:top-0">{children}</div>
     </div>
   );
 }
