@@ -50,6 +50,7 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
       <div className="flex justify-between items-center gap-2">
         {/* Colonne TITRE */}
         <div className="flex items-center gap-2 w-3/4 ">
+          {/* Icone */}
           <div className="flex justify-center h-[30px] w-[30px] ">
             <Icon
               iconName={conf[payload.value as keyof typeof conf]?.icon}
@@ -60,12 +61,13 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
               )}
             ></Icon>
           </div>
+          {/* Libellé */}
           <span className="text-lg text-gray-700 font-bold">
             {conf[payload.value as keyof typeof conf]?.label}
           </span>
         </div>
         {/* Colonne TOTAL */}
-        <div className="flex  justify-start w-1/4 pr-2 ">
+        <div className="flex justify-start w-1/4 pr-2">
           <div className="flex flex-col w-fit ">
             <span className="text-xs text-gray-500  w-fit">TOTAL</span>
             <span className="text-sm font-semibold text-gray-800  w-fit">
@@ -83,10 +85,10 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
       <>
         <g>
           <foreignObject
-            x={x - 200}
-            y={y - 21}
-            width="240px"
-            height="3.6em"
+            x={x - 193}
+            y={y - 19}
+            width="210px"
+            height="3.4em"
             className=""
           >
             {customLegend}
@@ -151,7 +153,7 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
           data={data}
           barSize={30}
           margin={{
-            left: 200,
+            left: 170,
           }}
         >
           <CartesianGrid />
@@ -171,7 +173,7 @@ const CustomChart: React.FC<CustomChartProps> = ({ data, loading, conf }) => {
             type="category"
             tickLine={false}
             axisLine={false}
-            tickMargin={40}
+            tickMargin={20}
             tick={customizedGroupTick}
           />
 
