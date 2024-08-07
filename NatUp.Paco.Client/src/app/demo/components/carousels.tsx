@@ -41,7 +41,7 @@ export default function Carousels() {
                       </div>
                       <div className="text-sm text-center">
                         <span className="font-extrabold text-gray-700">
-                          93 918,96
+                          5000,00
                         </span>{" "}
                         <span className="text-xs">€ HT.</span>
                       </div>

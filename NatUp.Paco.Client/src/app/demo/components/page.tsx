@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Toasts from "./toasts";
 import Carousels from "./carousels";
+import Toggles from "./toggles";
 
 export default function Demo() {
   return (
@@ -43,6 +44,7 @@ export default function Demo() {
             <TabsTrigger value="tags">Tags</TabsTrigger>
             <TabsTrigger value="toast">Toast</TabsTrigger>
             <TabsTrigger value="carousels">Carousel</TabsTrigger>
+            <TabsTrigger value="toggles">Toggle Group</TabsTrigger>
           </TabsList>
           <TabsContent value="buttons">
             <Buttons />
@@ -76,6 +78,9 @@ export default function Demo() {
           </TabsContent>
           <TabsContent value="carousels">
             <Carousels />
+          </TabsContent>
+          <TabsContent value="toggles">
+            <Toggles />
           </TabsContent>
         </Tabs>
       </div>

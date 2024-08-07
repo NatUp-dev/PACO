@@ -99,6 +99,35 @@ export default function Pies() {
         </CardHeader>
         <CardContent>
           <div className="flex justify-center items-baseline space-x-2 pb-10">
+            <div className="relative flex justify-center items-center ">
+              <Skeleton className="w-72 h-72 rounded-full " />
+              <div className="w-1/2 h-1/2 rounded-full absolute bg-card" />
+              <div className="w-36 h-2 bg-card absolute right-0"></div>
+              <div className="w-2 h-36 bg-card absolute top-0"></div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="flex justify-center space-x-2">
+              <Skeleton className="h-4 w-4 rounded-md" />
+              <div className="space-y-4">
+                <Skeleton className="h-4 w-[150px]" />
+              </div>
+            </div>
+            <div className="flex justify-center space-x-2">
+              <Skeleton className="h-4 w-4 rounded-md" />
+              <div className="space-y-4">
+                <Skeleton className="h-4 w-[150px]" />
+              </div>
+            </div>
+            <div className="flex justify-center space-x-2">
+              <Skeleton className="h-4 w-4 rounded-md" />
+              <div className="space-y-4">
+                <Skeleton className="h-4 w-[150px]" />
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="flex justify-center items-baseline space-x-2 pb-10">
             <Skeleton className="h-24 w-12" />
             <Skeleton className="h-40 w-12" />
             <Skeleton className="h-32 w-12" />
@@ -122,7 +151,7 @@ export default function Pies() {
                 <Skeleton className="h-4 w-[150px]" />
               </div>
             </div>
-          </div>
+          </div> */}
         </CardContent>
         <CardFooter className="flex-col gap-2 text-sm"></CardFooter>
       </Card>
