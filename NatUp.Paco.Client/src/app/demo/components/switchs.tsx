@@ -19,9 +19,11 @@ export default function Switchs() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">aspects</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex gap-6 items-center">
           <Switch />
           <Switch checked />
+          <Switch size={"small"} />
+          <Switch checked size={"small"} />
         </div>
         <div className="text-xs py-2">group inline</div>
         <div className="flex gap-8">

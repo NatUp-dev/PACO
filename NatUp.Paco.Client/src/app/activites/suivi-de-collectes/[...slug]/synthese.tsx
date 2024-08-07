@@ -9,6 +9,13 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import React, { useState } from "react";
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Switch } from "@/components/ui/switch";
+
 export default function Synthese({ type }: { type: string }) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
 
@@ -36,12 +43,75 @@ export default function Synthese({ type }: { type: string }) {
         <div>
           <div className="flex justify-between items-center">
             <Label className="font-bold">Indicateurs</Label>
-            <Button size={"sm"} variant={"blue"}>
-              <div className="flex gap-1">
-                <Icon size={"small"} iconName={"Settings"}></Icon>{" "}
-                <span>Définir les indicateurs</span>
-              </div>
-            </Button>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button size={"sm"} variant={"blue"}>
+                  <div className="flex gap-1">
+                    <Icon size={"small"} iconName={"Settings"}></Icon>{" "}
+                    <span>Définir les indicateurs</span>
+                  </div>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80 mr-7 mt-2">
+                <div className="grid gap-4">
+                  <div className="text-gray-700">
+                    <h4 className="text-sm font-medium leading-none">
+                      Choix des indicateurs
+                    </h4>
+                    <p className="text-xs  text-muted-foreground">
+                      Affichage de 4 indicateurs possibles
+                    </p>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option1" />
+                        <Label size={"small"} htmlFor="option1">
+                          Livraisons
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option2" />
+                        <Label size={"small"} htmlFor="option2">
+                          Paiements effectués
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option3" />
+                        <Label size={"small"} htmlFor="option3">
+                          Prochain paiement
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option4" />
+                        <Label size={"small"} htmlFor="option4">
+                          Apports contractualisés
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option5" />
+                        <Label size={"small"} htmlFor="option5">
+                          Ventes stockage dépôt
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option6" />
+                        <Label size={"small"} htmlFor="option6">
+                          Prix moyen pondéré blé tendre
+                        </Label>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Switch size={"small"} id="option7" />
+                        <Label size={"small"} htmlFor="option7">
+                          Reste à vendre
+                        </Label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -90,6 +160,14 @@ export default function Synthese({ type }: { type: string }) {
               </Button>
             </Link>
           </div>
+          <Card className="h-56 mt-3">
+            <div className="flex items-center justify-center h-full w-full text-gray-300">
+              <Icon
+                iconName="Hourglass"
+                className="hover:rotate-180 transition ease-in-out duration-500 "
+              ></Icon>
+            </div>
+          </Card>
         </div>
 
         {/* Contrats */}
@@ -112,6 +190,14 @@ export default function Synthese({ type }: { type: string }) {
               </Button>
             </Link>
           </div>
+          <Card className="h-56 mt-3">
+            <div className="flex items-center justify-center h-full w-full text-gray-300">
+              <Icon
+                iconName="Hourglass"
+                className="hover:rotate-180 transition ease-in-out duration-500"
+              ></Icon>
+            </div>
+          </Card>
         </div>
 
         {/* Paiements */}
@@ -134,11 +220,27 @@ export default function Synthese({ type }: { type: string }) {
               </Button>
             </Link>
           </div>
+          <Card className="h-56 mt-3">
+            <div className="flex items-center justify-center h-full w-full text-gray-300">
+              <Icon
+                iconName="Hourglass"
+                className="hover:rotate-180 transition ease-in-out duration-500 "
+              ></Icon>
+            </div>
+          </Card>
         </div>
 
         {/* Mes avantages NatUp */}
         <div>
           <Label className="font-bold">Mes avantages NatUp</Label>
+          <Card className="h-56 mt-3">
+            <div className="flex items-center justify-center h-full w-full text-gray-300">
+              <Icon
+                iconName="Hourglass"
+                className="hover:rotate-180 transition ease-in-out duration-500 "
+              ></Icon>
+            </div>
+          </Card>
         </div>
       </div>
     </>
