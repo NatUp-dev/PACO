@@ -140,7 +140,10 @@ export function DataTable<CustomData, TValue>({
         <div>
           <Skeleton className="w-full h-12 rounded-none" />
           {[...Array(6)].map((x, i) => (
-            <div className="grid grid-cols-4 lg:grid-cols-8 gap-8 py-6 border-b">
+            <div
+              key={i + "_0"}
+              className="grid grid-cols-4 lg:grid-cols-8 gap-8 py-6 border-b"
+            >
               <Skeleton className={cn("h-4 w-full ")} />
               <Skeleton className={cn("h-4 w-full ")} />
               <Skeleton className={cn("h-4 w-full ")} />
@@ -191,7 +194,7 @@ export function DataTable<CustomData, TValue>({
                 table.getRowModel().rows.map((row, index) => (
                   <>
                     <TableRow
-                      key={row.id}
+                      key={row.id + index + "_1"}
                       data-state={row.getIsSelected() && "selected"}
                       onClick={() => {
                         row.toggleExpanded();
@@ -202,7 +205,7 @@ export function DataTable<CustomData, TValue>({
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell
-                          key={cell.id}
+                          key={cell.id + "_" + index}
                           className={cn(
                             isSubTable && index === 0 ? "pt-0 " : ""
                           )}
@@ -216,11 +219,9 @@ export function DataTable<CustomData, TValue>({
                     </TableRow>
 
                     {row.getIsExpanded() && (
-                      <TableRow>
-                        <TableCell colSpan={columns.length + 1} className="p-0">
-                          {row.getValue("subTable")}
-                        </TableCell>
-                      </TableRow>
+                      <TableCell colSpan={columns.length + 1} className="p-0">
+                        {row.getValue("subTable")}
+                      </TableCell>
                     )}
                   </>
                 ))
