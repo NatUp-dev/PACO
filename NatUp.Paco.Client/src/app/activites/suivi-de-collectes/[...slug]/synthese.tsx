@@ -1,14 +1,21 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import CustomToggle from "@/components/ui/customToggle";
 import DataCard from "@/components/ui/datacard";
 import Icon from "@/components/ui/icon";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import React, { useState } from "react";
-
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartLegend,
+  ChartLegendContent,
+} from "@/components/ui/chart";
 import {
   Popover,
   PopoverContent,
@@ -25,6 +32,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import CustomPieChart from "@/components/ui/customPieChart";
+import DataList from "@/components/ui/datalist";
+import { Badge } from "@/components/ui/badge";
 
 export default function Synthese({ type }: { type: string }) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -124,14 +133,118 @@ export default function Synthese({ type }: { type: string }) {
     },
   ];
 
+  const items = [
+    {
+      label: "Août 2023",
+      value: 93918.96,
+      type: "€",
+      badge: (
+        <Badge icon="Clock3" className="bg-blue-50 text-blue-600">
+          À venir
+        </Badge>
+      ),
+    },
+    {
+      label: "Juillet 2023",
+      value: 93918.96,
+      type: "€",
+      badge: (
+        <Badge icon="Check" className="bg-success-50 text-success-600">
+          Effectué
+        </Badge>
+      ),
+    },
+    {
+      label: "Juin 2023",
+      value: 93918.96,
+      type: "€",
+      badge: (
+        <Badge icon="Check" className="bg-success-50 text-success-600">
+          Effectué
+        </Badge>
+      ),
+    },
+    {
+      label: "Mai 2023",
+      value: 93918.96,
+      type: "€",
+      badge: (
+        <Badge icon="Check" className="bg-success-50 text-success-600">
+          Effectué
+        </Badge>
+      ),
+    },
+    {
+      label: "Avril 2023",
+      value: 93918.96,
+      type: "€",
+      badge: (
+        <Badge icon="Check" className="bg-success-50 text-success-600">
+          Effectué
+        </Badge>
+      ),
+    },
+  ];
+
+  type ChartDataItem = {
+    type: string;
+    "2021": number;
+    "2022": number;
+    "2023": number;
+    [key: string]: number | string;
+  };
+
+  const barchartData: ChartDataItem[] = [
+    { type: "ble", "2021": 150, "2022": 312, "2023": 498 },
+    { type: "orge", "2021": 245, "2022": 491, "2023": 499 },
+    { type: "colza", "2021": 589, "2022": 301, "2023": 399 },
+    { type: "erucique", "2021": 254, "2022": 319, "2023": 400 },
+    { type: "pois", "2021": 224, "2022": 481, "2023": 499 },
+  ];
+
+  // Obtenez les clés des données
+  const dataKeys = Object.keys(barchartData[0]).filter((key) => key !== "type");
+
+  const barchartConfig = {
+    "2021": {
+      color: "#95C413",
+      label: "2021",
+    },
+    "2022": {
+      color: "#14AFD1",
+      label: "2022",
+    },
+    "2023": {
+      color: "#00677E",
+      label: "2023",
+    },
+    ble: {
+      label: "Blé",
+    },
+    orge: {
+      label: "Orge",
+    },
+    colza: {
+      label: "Colza",
+    },
+    erucique: {
+      label: "Erucique",
+    },
+    pois: {
+      label: "Pois",
+    },
+  } satisfies ChartConfig;
+
   return (
     <>
-      <ScrollArea className="shadow-sm whitespace-nowrap">
-        <div className="bg-white py-4 px-7 border-0 border-b flex gap-2 w-full">
-          <CustomToggle onSelectItem={handleSelectYear} items={years} />
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+      <div className="sticky w-full top-[116px] md:top-[54px] z-10">
+        <ScrollArea className="shadow-sm whitespace-nowrap ">
+          <div className="bg-white py-4 px-7 border-0 border-b flex gap-2 w-full">
+            <CustomToggle onSelectItem={handleSelectYear} items={years} />
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+      </div>
 
       <div className="flex flex-col gap-14 p-4 sm:p-7">
         {/* Indicateurs */}
@@ -239,7 +352,7 @@ export default function Synthese({ type }: { type: string }) {
           <div className="flex justify-between items-center mb-3">
             <Link href={`${baseUrl}/livraisons`}>
               <div className="flex items-center gap-2">
-                <Label className="font-bold">Livraisons</Label>
+                <span className="font-bold">Livraisons</span>
                 <Icon
                   size={"default"}
                   className="text-gray-500 border border-gray-300 bg-white p-0"
@@ -300,7 +413,7 @@ export default function Synthese({ type }: { type: string }) {
           <div className="flex justify-between items-center">
             <Link href={`${baseUrl}/contrats`}>
               <div className="flex items-center gap-2">
-                <Label className="font-bold">Contrats</Label>
+                <span className="font-bold">Contrats</span>
                 <Icon
                   size={"default"}
                   className="text-gray-500 border border-gray-300 bg-white p-0"
@@ -315,7 +428,7 @@ export default function Synthese({ type }: { type: string }) {
               </Button>
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 pt-3 h-fit">
+          <div className="grid lg:grid-cols-2 gap-6 pt-3 h-fit">
             <Card>
               <CardContent className="p-4 md:p-6">
                 <Label className="font-bold">
@@ -324,7 +437,7 @@ export default function Synthese({ type }: { type: string }) {
                 <RadioGroup
                   defaultValue="option0"
                   orientation="horizontal"
-                  className="flex relative top-[21px]"
+                  className="flex mt-4"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option0" id="option0" />
@@ -386,7 +499,7 @@ export default function Synthese({ type }: { type: string }) {
           <div className="flex justify-between items-center">
             <Link href={`${baseUrl}/paiements`}>
               <div className="flex items-center gap-2">
-                <Label className="font-bold">Paiements</Label>
+                <span className="font-bold">Paiements</span>
                 <Icon
                   size={"default"}
                   className="text-gray-500 border border-gray-300 bg-white p-0"
@@ -401,14 +514,58 @@ export default function Synthese({ type }: { type: string }) {
               </Button>
             </Link>
           </div>
-          <Card className="h-56 mt-3">
-            <div className="flex items-center justify-center h-full w-full text-gray-300">
-              <Icon
-                iconName="Hourglass"
-                className="hover:rotate-180 transition ease-in-out duration-500 "
-              ></Icon>
-            </div>
-          </Card>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-fit mt-3">
+            <Card className="h-58 w-full min-h-56">
+              <CardContent className="p-4 md:p-6">
+                <Label className="font-bold">
+                  Récapitulation des paiements (€ TTC)
+                </Label>
+                <DataList
+                  data={items}
+                  title="Récapitulatif des paiements (€ TTC)"
+                  nodatatitle="Pas de paiements pour la récolte sélectionnée"
+                />
+              </CardContent>
+            </Card>
+            <Card className="h-58 w-full min-h-56 lg:col-span-2">
+              <CardContent className="p-4 md:p-6">
+                <Label className="font-bold">Prix moyen pondéré (€/T)</Label>
+                <ChartContainer config={barchartConfig} className="h-80 w-full">
+                  <BarChart accessibilityLayer data={barchartData}>
+                    <CartesianGrid vertical={false} />
+                    <XAxis
+                      dataKey="type"
+                      tickLine={false}
+                      tickMargin={10}
+                      axisLine={false}
+                      tickFormatter={(value) =>
+                        barchartConfig[value as keyof typeof barchartConfig]
+                          ?.label
+                      }
+                    />
+                    <YAxis tickLine={false} axisLine={false} />
+                    <ChartTooltip />
+
+                    {dataKeys.map((key, index) => (
+                      <Bar
+                        key={key}
+                        dataKey={key}
+                        fill={`var(--color-${key})`}
+                        radius={4}
+                      />
+                    ))}
+
+                    <ChartLegend
+                      verticalAlign="top"
+                      align="right"
+                      className="justify-end"
+                      content={<ChartLegendContent />}
+                    />
+                  </BarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Mes avantages NatUp */}

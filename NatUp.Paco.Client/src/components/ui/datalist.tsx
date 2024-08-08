@@ -46,84 +46,74 @@ const DataList: React.FC<DataListProps> = ({
 }) => {
   return !loading ? (
     data ? (
-      <Card>
-        <CardHeader>
-          <Label className="font-bold">{title} </Label>
-        </CardHeader>
-        <CardContent>
-          {data.map((item, index) => (
-            <div
-              className={cn(
-                "flex justify-between items-center pb-3 pt-3",
-                index > 0 ? "border-t" : ""
-              )}
-              key={index}
-            >
-              <div>
-                <div className="uppercase text-xs text-gray-500">
-                  {item.label}
-                </div>
-                <div>
-                  <span className="font-bold">
-                    {item.value.toLocaleString("fr-FR", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </span>
-                  {item.type && <span>{" " + item.type}</span>}
-                </div>
+      <>
+        {data.map((item, index) => (
+          <div
+            className={cn(
+              "flex justify-between items-center pb-3 pt-3",
+              index > 0 ? "border-t" : ""
+            )}
+            key={index}
+          >
+            <div>
+              <div className="uppercase text-xs text-gray-500">
+                {item.label}
               </div>
-              <div>{item.badge}</div>
+              <div>
+                <span className="font-bold">
+                  {item.value.toLocaleString("fr-FR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+                {item.type && <span>{" " + item.type}</span>}
+              </div>
             </div>
-          ))}
-        </CardContent>
-      </Card>
+            <div>{item.badge}</div>
+          </div>
+        ))}
+      </>
     ) : (
       <NoData title={nodatatitle} subtitle={nodatasubtitle} />
     )
   ) : (
-    <Card>
-      <CardHeader>
-        <Label className="font-bold">{title} </Label>
-      </CardHeader>
-      <CardContent>
-        <div className="flex justify-between items-center pb-3 pt-3 ">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-[70px]" />
-            <Skeleton className="h-4 w-[90px]" />
-          </div>
-          <Skeleton className="h-6 w-[90px]" />
+    <>
+      <div className="flex justify-between items-center pb-3 pt-3 ">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-[70px]" />
+          <Skeleton className="h-4 w-[90px]" />
         </div>
-        <div className="flex justify-between items-center pb-3 pt-3 border-t">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-[70px]" />
-            <Skeleton className="h-4 w-[90px]" />
-          </div>
-          <Skeleton className="h-6 w-[90px]" />
+        <Skeleton className="h-6 w-[90px]" />
+      </div>
+      <div className="flex justify-between items-center pb-3 pt-3 border-t">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-[70px]" />
+          <Skeleton className="h-4 w-[90px]" />
         </div>
-        <div className="flex justify-between items-center pb-3 pt-3 border-t">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-[70px]" />
-            <Skeleton className="h-4 w-[90px]" />
-          </div>
-          <Skeleton className="h-6 w-[90px]" />
+        <Skeleton className="h-6 w-[90px]" />
+      </div>
+      <div className="flex justify-between items-center pb-3 pt-3 border-t">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-[70px]" />
+          <Skeleton className="h-4 w-[90px]" />
         </div>
-        <div className="flex justify-between items-center pb-3 pt-3 border-t">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-[70px]" />
-            <Skeleton className="h-4 w-[90px]" />
-          </div>
-          <Skeleton className="h-6 w-[90px]" />
+        <Skeleton className="h-6 w-[90px]" />
+      </div>
+      <div className="flex justify-between items-center pb-3 pt-3 border-t">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-[70px]" />
+          <Skeleton className="h-4 w-[90px]" />
         </div>
-        <div className="flex justify-between items-center pb-3 pt-3 border-t">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-[70px]" />
-            <Skeleton className="h-4 w-[90px]" />
-          </div>
-          <Skeleton className="h-6 w-[90px]" />
+        <Skeleton className="h-6 w-[90px]" />
+      </div>
+      <div className="flex justify-between items-center pb-3 pt-3 border-t">
+        <div className="space-y-2 w-full">
+          <Skeleton className="h-4 w-[70px]" />
+          <Skeleton className="h-4 w-[90px]" />
         </div>
-      </CardContent>
-    </Card>
+        <Skeleton className="h-6 w-[90px]" />
+      </div>
+    </>
   );
 };
 

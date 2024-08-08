@@ -34,13 +34,23 @@ export const columns: ColumnDef<TableData>[] = [
   {
     accessorKey: "numBon",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="N° de bon" />
+      <DataTableColumnHeader column={column} title="N° de bon" align="right" />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right">{row.getValue("numBon")}</div>
     ),
   },
   {
     accessorKey: "ticket",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Ticket de pesée" />
+      <DataTableColumnHeader
+        column={column}
+        title="Ticket de pesée"
+        align="right"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right">{row.getValue("ticket")}</div>
     ),
   },
   {
@@ -52,19 +62,40 @@ export const columns: ColumnDef<TableData>[] = [
   {
     accessorKey: "poidsBrut",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Poids brut (T)" />
+      <DataTableColumnHeader
+        column={column}
+        title="Poids brut (T)"
+        align="right"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right">{row.getValue("poidsBrut")}</div>
     ),
   },
   {
     accessorKey: "poidsNormes",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Poids aux normes (T)" />
+      <DataTableColumnHeader
+        column={column}
+        title="Poids aux normes (T)"
+        align="right"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right">{row.getValue("poidsNormes")}</div>
     ),
   },
   {
     accessorKey: "montant",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Montant net (HT)" />
+      <DataTableColumnHeader
+        column={column}
+        title="Montant net (HT)"
+        align="right"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right">{row.getValue("montant")}</div>
     ),
   },
   {
@@ -124,6 +155,7 @@ interface TableData extends Payment {
 export default function Datatables() {
   //   const [data, setData] = useState<Payment[]>([]);
   const [tableData, setTableData] = useState<TableData[]>([]);
+  const [tableLoading, setTableLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fakeData: Payment[] = [];
@@ -159,6 +191,10 @@ export default function Datatables() {
           },
         ],
       });
+
+      setTimeout(function () {
+        setTableLoading(false);
+      }, 1000);
     }
 
     // Mapping Payment data to TableData
@@ -178,7 +214,7 @@ export default function Datatables() {
   }, []);
 
   return (
-    <Card className="bg-gray-100">
+    <Card>
       <CardHeader>
         <CardTitle>Data Table</CardTitle>
       </CardHeader>
@@ -188,6 +224,7 @@ export default function Datatables() {
           data={tableData}
           stickyClassName="top-[6px]"
           pagination
+          loading={tableLoading}
         />
       </CardContent>
     </Card>

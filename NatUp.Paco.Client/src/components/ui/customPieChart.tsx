@@ -105,17 +105,20 @@ const CustomPieChart = <T extends Record<string, any>>({
                     <tspan
                       x={viewBox.cx}
                       y={viewBox.cy}
-                      className="fill-foreground text-3xl font-bold"
+                      className="text-gray-500 text-base font-bold"
                     >
                       {total.toLocaleString()}
+                      {unit.length == 1 ? " " + unit : ""}
                     </tspan>
-                    <tspan
-                      x={viewBox.cx}
-                      y={(viewBox.cy || 0) + 24}
-                      className="fill-muted-foreground"
-                    >
-                      {unit}
-                    </tspan>
+                    {unit.length > 1 && (
+                      <tspan
+                        x={viewBox.cx}
+                        y={(viewBox.cy || 0) + 24}
+                        className="fill-muted-foreground"
+                      >
+                        {unit}
+                      </tspan>
+                    )}
                   </text>
                 );
               }

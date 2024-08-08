@@ -12,17 +12,13 @@ interface NoDataProps {
 
 const NoData: React.FC<NoDataProps> = ({ title, subtitle }) => {
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex flex-col space-y-4 text-center">
-          <div className="self-center">
-            <NodataSvg className="w-64 h-48" />
-          </div>
-          <Label>{title}</Label>
-          {subtitle && <Label size={"small"}>{subtitle}</Label>}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col space-y-4 text-center">
+      <div className="self-center">
+        <NodataSvg className="w-64 h-48" />
+      </div>
+      <Label>{title}</Label>
+      {subtitle && <Label size={"small"}>{subtitle}</Label>}
+    </div>
   );
 };
 

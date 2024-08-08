@@ -1,7 +1,9 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Icon from "@/components/ui/icon";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { Component, PenTool, PieChart, Table } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -14,7 +16,12 @@ export default function Demo() {
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center justify-center">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>Components</CardTitle>
+            <CardTitle>
+              <div className="flex items-center gap-2">
+                <Component />
+                <span>Components</span>
+              </div>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6">
@@ -31,7 +38,12 @@ export default function Demo() {
         </Card>
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>Charts</CardTitle>
+            <CardTitle>
+              <div className="flex items-center gap-2">
+                <PieChart />
+                <span>Charts</span>
+              </div>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6">
@@ -48,7 +60,12 @@ export default function Demo() {
         </Card>
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>Tables & listes</CardTitle>
+            <CardTitle>
+              <div className="flex items-center gap-2">
+                <Table />
+                <span>Tables & lists</span>
+              </div>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6">

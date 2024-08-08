@@ -41,7 +41,9 @@ const HelpContent = ({ className }: { className?: string }) => {
       </div>
       <div className="text-green-950 font-medium text-xs text-center">
         <div>Contacter notre support</div>
-        <div className="text-green-600 font-bold text-lg">0 809 409 409</div>
+        <div className="text-green-600 font-bold text-lg">
+          <a href="tel:0 809 409 409">0 809 409 409</a>
+        </div>
         <div className="font-light">Du lundi au vendredi</div>
         <div className="font-light">(Service gratuit + prix appel.)</div>
       </div>

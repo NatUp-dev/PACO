@@ -67,21 +67,22 @@ const items = [
 
 export default function Datalists() {
   return (
-    <Card className="bg-gray-100">
+    <Card>
       <CardHeader>
         <CardTitle>Data List</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid lg:grid-cols-3 gap-4">
-          <div>
+          <div className="p-2">
             <Label>Pas de données</Label>
+
             <DataList
               title="Récapitulatif des paiements (€ TTC)"
               nodatatitle="Pas de paiements pour la récolte sélectionnée"
               nodatasubtitle="Sélectionnez une autre période pour avoir une vue des paiements"
             />
           </div>
-          <div>
+          <div className="p-2">
             <Label>Chargement</Label>
             <DataList
               loading
@@ -89,7 +90,7 @@ export default function Datalists() {
               nodatatitle="Pas de paiements pour la récolte sélectionnée"
             />
           </div>
-          <div>
+          <div className="p-2">
             <Label>Exemple</Label>
             <DataList
               data={items}
