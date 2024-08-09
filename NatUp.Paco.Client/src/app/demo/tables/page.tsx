@@ -9,7 +9,7 @@ import Datatables from "./datatables";
 
 export default function tables() {
   return (
-    <div className="px-20 py-10">
+    <div className="p-4 lg:p-8">
       <div className="pb-10 uppercase flex gap-5 items-center">
         <Link
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}

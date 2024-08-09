@@ -27,7 +27,7 @@ export default function Selects() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">size</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex flex-wrap gap-4 items-end">
           <div className="flex flex-col gap-2">
             <Label size={"small"}>small</Label>
             <Select>
@@ -69,11 +69,11 @@ export default function Selects() {
           </div>
         </div>
         <div className="text-xs py-2">multi select</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex flex-wrap gap-6 items-end">
           <div className="flex flex-col gap-2">
             <Label size={"small"}>small</Label>
             <MultiSelect
-              className="w-[380px]"
+              className="w-[300px]"
               options={[
                 { value: "value1", label: "Value 1" },
                 { value: "value2", label: "Value 2" },
@@ -89,7 +89,7 @@ export default function Selects() {
           <div className="flex flex-col gap-2">
             <Label>default</Label>
             <MultiSelect
-              className="w-[380px]"
+              className="w-[300px]"
               options={[
                 { value: "value1", label: "Value 1" },
                 { value: "value2", label: "Value 2" },
@@ -104,7 +104,7 @@ export default function Selects() {
           <div className="flex flex-col gap-2">
             <Label size={"large"}>large</Label>
             <MultiSelect
-              className="w-[380px]"
+              className="w-[300px]"
               options={[
                 { value: "value1", label: "Value 1" },
                 { value: "value2", label: "Value 2" },

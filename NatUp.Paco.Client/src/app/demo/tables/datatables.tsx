@@ -8,6 +8,7 @@ import { DataTable, DataTableColumnHeader } from "@/components/ui/datatable";
 
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export const columns: ColumnDef<TableData>[] = [
   {
@@ -103,7 +104,9 @@ export const columns: ColumnDef<TableData>[] = [
     header: "",
     cell: ({ row }) => {
       return (
-        <span>{row.getIsExpanded() ? <ChevronUp /> : <ChevronDown />}</span>
+        <span className="text-gray-500">
+          {row.getIsExpanded() ? <ChevronUp /> : <ChevronDown />}
+        </span>
       );
     },
   },
@@ -219,13 +222,16 @@ export default function Datatables() {
         <CardTitle>Data Table</CardTitle>
       </CardHeader>
       <CardContent>
-        <DataTable
-          columns={columns}
-          data={tableData}
-          stickyClassName="top-[6px]"
-          pagination
-          loading={tableLoading}
-        />
+        <ScrollArea>
+          <DataTable
+            columns={columns}
+            data={tableData}
+            stickyClassName="top-[6px]"
+            pagination
+            loading={tableLoading}
+          />
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </CardContent>
     </Card>
   );

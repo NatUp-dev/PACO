@@ -17,21 +17,21 @@ export default function Buttons() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">size</div>
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-6 items-center">
           <Button size={"xs"}>Bouton</Button>
           <Button size={"sm"}>Bouton</Button>
           <Button size={"default"}>Bouton</Button>
           <Button size={"lg"}>Bouton</Button>
         </div>
         <div className="text-xs py-2">type</div>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap gap-6">
           <Button>Valider</Button>
           <Button variant={"secondary"}>Modifier</Button>
           <Button variant={"destructive"}>Quitter</Button>
           <Button variant={"outline"}>Annuler</Button>
         </div>
         <div className="text-xs py-2">type disabled</div>
-        <div className="flex gap-6">
+        <div className="flex gap-6 flex-wrap">
           <Button disabled>Valider</Button>
           <Button variant={"secondary"} disabled>
             Modifier

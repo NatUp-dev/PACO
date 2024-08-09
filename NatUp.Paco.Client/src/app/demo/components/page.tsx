@@ -15,10 +15,11 @@ import { buttonVariants } from "@/components/ui/button";
 import Toasts from "./toasts";
 import Carousels from "./carousels";
 import Toggles from "./toggles";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function Demo() {
   return (
-    <div className="px-20 py-10">
+    <div className="p-4 lg:p-8">
       <div className="pb-10 uppercase flex gap-5 items-center">
         <Link
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
@@ -32,20 +33,23 @@ export default function Demo() {
       </div>
       <div className="flex flex-col gap-10">
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList>
-            <TabsTrigger value="buttons">Button</TabsTrigger>
-            <TabsTrigger value="labels">Label</TabsTrigger>
-            <TabsTrigger value="inputs">Input</TabsTrigger>
-            <TabsTrigger value="selects">Select</TabsTrigger>
-            <TabsTrigger value="checkboxs">Checkbox</TabsTrigger>
-            <TabsTrigger value="radios">Radio</TabsTrigger>
-            <TabsTrigger value="switchs">Switch</TabsTrigger>
-            <TabsTrigger value="icons">Icons</TabsTrigger>
-            <TabsTrigger value="tags">Tags</TabsTrigger>
-            <TabsTrigger value="toast">Toast</TabsTrigger>
-            <TabsTrigger value="carousels">Carousel</TabsTrigger>
-            <TabsTrigger value="toggles">Toggle Group</TabsTrigger>
-          </TabsList>
+          <ScrollArea>
+            <TabsList>
+              <TabsTrigger value="buttons">Button</TabsTrigger>
+              <TabsTrigger value="labels">Label</TabsTrigger>
+              <TabsTrigger value="inputs">Input</TabsTrigger>
+              <TabsTrigger value="selects">Select</TabsTrigger>
+              <TabsTrigger value="checkboxs">Checkbox</TabsTrigger>
+              <TabsTrigger value="radios">Radio</TabsTrigger>
+              <TabsTrigger value="switchs">Switch</TabsTrigger>
+              <TabsTrigger value="icons">Icons</TabsTrigger>
+              <TabsTrigger value="tags">Tags</TabsTrigger>
+              <TabsTrigger value="toast">Toast</TabsTrigger>
+              <TabsTrigger value="carousels">Carousel</TabsTrigger>
+              <TabsTrigger value="toggles">Toggle Group</TabsTrigger>
+            </TabsList>
+            <ScrollBar orientation="horizontal"></ScrollBar>
+          </ScrollArea>
           <TabsContent value="buttons">
             <Buttons />
           </TabsContent>

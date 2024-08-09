@@ -30,7 +30,7 @@ export default function Inputs() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">size</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex flex-wrap gap-6 items-end">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Label et input (small)</Label>
             <Input size={"small"} />
@@ -45,7 +45,7 @@ export default function Inputs() {
           </div>
         </div>
         <div className="text-xs py-2">type</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex flex-wrap gap-6 items-end">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Password (small)</Label>
             <PasswordInput size={"small"} />
@@ -59,7 +59,7 @@ export default function Inputs() {
             <PasswordInput size={"large"} />
           </div>
         </div>
-        <div className="flex gap-6 items-end pt-4">
+        <div className="flex flex-wrap gap-6 items-end pt-4">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Placeholder (small)</Label>
             <Input size={"small"} placeholder="Placeholder" />
@@ -73,7 +73,7 @@ export default function Inputs() {
             <Input size={"large"} placeholder="Placeholder" />
           </div>
         </div>
-        <div className="flex gap-6 items-end pt-4">
+        <div className="flex flex-wrap gap-6 items-end pt-4">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Prefixed (small)</Label>
             <Input size={"small"} prefix="Hash" />
@@ -87,7 +87,7 @@ export default function Inputs() {
             <Input size={"large"} prefix="Hash" />
           </div>
         </div>
-        <div className="flex gap-6 items-end pt-4">
+        <div className="flex flex-wrap gap-6 items-end pt-4">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Suffixed (small)</Label>
             <Input size={"small"} suffix="Hash" />
@@ -101,7 +101,7 @@ export default function Inputs() {
             <Input size={"large"} suffix="Hash" />
           </div>
         </div>
-        <div className="flex gap-6 items-end pt-4">
+        <div className="flex flex-wrap gap-6 items-end pt-4">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Prefixed & Suffixed (small)</Label>
             <Input size={"small"} prefix="Hash" suffix="Hash" />
@@ -116,7 +116,7 @@ export default function Inputs() {
           </div>
         </div>
         <div className="text-xs py-2">calendar</div>
-        <div className="flex gap-6 items-end pt-4">
+        <div className="flex flex-wrap gap-6 items-end pt-4">
           <div className="flex flex-col gap-2 w-80">
             <Label size={"small"}>Calendar (small)</Label>
             <Popover>

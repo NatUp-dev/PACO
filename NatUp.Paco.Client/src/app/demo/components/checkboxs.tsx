@@ -17,7 +17,7 @@ export default function Checkboxs() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">aspects</div>
-        <div className="flex gap-6 items-end">
+        <div className="flex flex-wrap gap-6 items-end">
           <div className="flex gap-10">
             <Checkbox checked="indeterminate" />
             <Checkbox />
@@ -25,7 +25,7 @@ export default function Checkboxs() {
           </div>
         </div>
         <div className="text-xs py-2">group inline</div>
-        <div className="flex gap-10">
+        <div className="flex flex-wrap gap-y-2 gap-x-10">
           <div className="flex items-center gap-2">
             <Checkbox id="option1" />
             <Label size={"small"} htmlFor="option1">

@@ -17,13 +17,13 @@ export default function Labels() {
       </CardHeader>
       <CardContent>
         <div className="text-xs py-2">size</div>
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-6 items-center">
           <Label size={"small"}>Label (small)</Label>
           <Label>Label (par défaut)</Label>
           <Label size={"large"}>Label (large)</Label>
         </div>
         <div className="text-xs py-2">required</div>
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-6 items-center">
           <Label required>Label d&apos;un champ requis</Label>
         </div>
       </CardContent>

@@ -26,7 +26,7 @@ export default function Switchs() {
           <Switch checked size={"small"} />
         </div>
         <div className="text-xs py-2">group inline</div>
-        <div className="flex gap-8">
+        <div className="flex flex-wrap gap-4">
           <div className="flex items-center gap-2">
             <Switch id="option1" />
             <Label size={"small"} htmlFor="option1">
